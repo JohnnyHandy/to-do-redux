@@ -1,0 +1,13 @@
+.title{
+    width:auto;
+    height:50px;
+    border:7px solid rgb(192, 69, 69);
+    padding: 10px 20px;
+    align-content: center;
+}
+
+.align{
+    text-align: center;
+    height:auto;
+    margin:auto
+}

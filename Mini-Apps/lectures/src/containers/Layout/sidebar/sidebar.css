@@ -1,0 +1,7 @@
+.sidebar{
+    width:30%;
+    height:auto;
+    float:left;
+    box-sizing: border-box;
+    border: 5px solid salmon
+}
