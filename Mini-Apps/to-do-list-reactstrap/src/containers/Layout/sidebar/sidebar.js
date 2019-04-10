@@ -2,6 +2,7 @@ import React from 'react'
 
 import classes from './sidebar.module.css'
 import {Card} from 'reactstrap'
+import List from '../../../components/list/list'
 
 const sidebar =(props)=>{
     return(
@@ -10,7 +11,7 @@ const sidebar =(props)=>{
                 List Sidebar
             </Card>
             <Card>
-                List Element
+                <List/>
             </Card>
         </Card>
     )
