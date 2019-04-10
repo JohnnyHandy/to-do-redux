@@ -1,0 +1,11 @@
+.Layout{
+    height:1024px;
+    width:768px;
+    box-sizing: border-box;
+    text-align: center;
+    align-content: center;
+    border: 2px solid salmon;
+    box-align: center;
+}
+
+

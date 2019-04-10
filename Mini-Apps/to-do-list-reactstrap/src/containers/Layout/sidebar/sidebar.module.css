@@ -1,0 +1,9 @@
+.sidebar{
+    width:50%;
+    height:100%;
+    box-sizing: border-box;
+    border: 1px solid lightsteelblue;
+    text-align:center;
+    align-content: center;
+    margin:auto
+}
