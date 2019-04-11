@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {Button,ListGroup} from 'reactstrap'
 import Input from '../UI/Input/Input'
@@ -65,7 +66,7 @@ class List extends Component{
                     {itemElement}
                 </ListGroup>
                
-                <Button onClick={this.toggleInputHandler} size="sm">Add Items</Button>
+                <Button onClick={this.toggleInputHandler} size="sm">Add Items <FontAwesomeIcon icon='plus'/></Button>
                 {inputElement}
             </div>
         )
