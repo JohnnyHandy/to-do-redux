@@ -7,7 +7,7 @@ const input =(props)=>{
     return(
         <div className={classes.Input}>
             <Input onChange={props.changedName} type="text" className={classes.inputElement} placeholder='Item Name'/>
-            <Input type='textarea' className={classes.inputElement} placeholder='Item Description'/>
+            <Input onChange={props.changedDesc} type='textarea' className={classes.inputElement} placeholder='Item Description'/>
             <Button onClick={props.addItem} size='sm'>Add Item</Button>
         </div>
         

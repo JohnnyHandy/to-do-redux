@@ -11,8 +11,21 @@ const items = (props)=>{
             {props.name}
             <hr/>
             <div>
-                <Button classname={classes.button} color='warning' size='sm'><FontAwesomeIcon icon='pen'/></Button>
-                <Button className={classes.button} color='danger' size='sm'><FontAwesomeIcon icon='times-circle'/></Button>
+                <Button
+                className={classes.button} 
+                color='warning' 
+                size='sm'
+                >
+                    <FontAwesomeIcon icon='pen'/>
+                </Button>
+                <Button 
+                className={classes.button} 
+                color='danger' 
+                size='sm'
+                id={props.id}
+                onClick={props.deleteClicked}>
+                    <FontAwesomeIcon icon='times-circle'/>
+                </Button>
             </div>
         </ListGroupItem>
         

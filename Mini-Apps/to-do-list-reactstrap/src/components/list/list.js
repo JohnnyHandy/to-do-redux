@@ -21,8 +21,22 @@ class List extends Component{
     }
 
     inputNameHandler = (event)=>{
+        const description = this.state.newItem.itemDesc
         this.setState({
-            newItem:{itemName:event.target.value}
+            newItem:{
+                itemName:event.target.value,
+                itemDesc:description
+            }
+        })
+    }
+
+    inputDescHandler = (event)=>{
+        const name = this.state.newItem.itemName
+        this.setState({
+            newItem:{
+                itemName:name,
+                itemDesc:event.target.value
+            }
         })
     }
 
@@ -41,12 +55,22 @@ class List extends Component{
         })
     }
 
+    deleteItemHandler = async (itemIndex)=>{
+        const oldState={...this.state}
+        await oldState.items.splice(itemIndex,1)
+        await oldState.items.forEach((item, index) => { 
+            item.id = index 
+        })
+        await this.setState({items:oldState.items})
+    }
+
     render(){
         let inputElement = null
          if(this.state.input){
              inputElement=(
                 <Input 
                 changedName={this.inputNameHandler}
+                changedDesc={this.inputDescHandler}
                 addItem={this.addItemHandler}/>
              )
          }
@@ -55,8 +79,10 @@ class List extends Component{
          if(this.state.items.length !== 0 ){
              itemElement = this.state.items.map((i,index)=>{
                  return <Items
+                        id={i.id}
                         name={i.itemName}
-                        key={index}/>
+                        key={index}
+                        deleteClicked={()=>this.deleteItemHandler(index)}/>
              })
          }
 
