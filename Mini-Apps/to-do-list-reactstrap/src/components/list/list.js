@@ -9,7 +9,8 @@ class List extends Component{
     state={
         items:[],
         newItem:{},
-        input:false
+        input:false,
+        itemIndex:0
     }
 
     toggleInputHandler =()=>{
@@ -30,6 +31,11 @@ class List extends Component{
         })
     }
 
+    itemIndexHandler= async (index)=>{
+        await this.setState({itemIndex:index})
+        await this.props.indexInfo(this.state.itemIndex)
+    }
+
     inputDescHandler = (event)=>{
         const name = this.state.newItem.itemName
         this.setState({
@@ -46,13 +52,16 @@ class List extends Component{
         oldState.items.push({
             id:newId, 
             itemName:oldState.newItem.itemName,
+            itemDesc:oldState.newItem.itemDesc,
             created:new Date().toISOString().slice(0,10)
         })
         this.setState({
             items:oldState.items,
             input:false,
-            newItem:{}
+            newItem:{},
+            itemIndex:newId
         })
+        this.passItemData()
     }
 
     deleteItemHandler = async (itemIndex)=>{
@@ -61,7 +70,16 @@ class List extends Component{
         await oldState.items.forEach((item, index) => { 
             item.id = index 
         })
-        await this.setState({items:oldState.items})
+        await this.setState({
+            items:oldState.items
+        })
+        this.passItemData()
+    }
+
+    passItemData = async ()=>{
+        const itemData=(this.state.items)
+        await this.props.itemData(itemData);
+        await this.props.indexInfo(this.state.itemIndex)
     }
 
     render(){
@@ -82,7 +100,8 @@ class List extends Component{
                         id={i.id}
                         name={i.itemName}
                         key={index}
-                        deleteClicked={()=>this.deleteItemHandler(index)}/>
+                        deleteClicked={()=>this.deleteItemHandler(index)}
+                        itemIndex={()=>this.itemIndexHandler(index)}/>
              })
          }
 

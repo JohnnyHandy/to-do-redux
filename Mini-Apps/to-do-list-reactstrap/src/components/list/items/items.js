@@ -1,14 +1,14 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {Button} from 'reactstrap'
-import {ListGroupItem} from 'reactstrap'
+import {ListGroupItem,CardTitle} from 'reactstrap'
 
 import classes from './items.module.css'
 
 const items = (props)=>{
     return(
         <ListGroupItem>
-            {props.name}
+            <CardTitle onClick={props.itemIndex}>{props.name}</CardTitle>
             <hr/>
             <div>
                 <Button

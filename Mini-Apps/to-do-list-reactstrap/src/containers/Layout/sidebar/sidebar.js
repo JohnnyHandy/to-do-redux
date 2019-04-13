@@ -11,7 +11,9 @@ const sidebar =(props)=>{
                 List Sidebar
             </Card>
             <Card>
-                <List/>
+                <List
+                itemData={props.itemData}
+                indexInfo={props.indexInfo}/>
             </Card>
         </Card>
     )
