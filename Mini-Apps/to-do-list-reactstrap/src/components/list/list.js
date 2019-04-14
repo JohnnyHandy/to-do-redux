@@ -10,24 +10,59 @@ class List extends Component{
         items:[],
         newItem:{},
         input:false,
-        itemIndex:0
+        itemIndex:0,
+        edit:false,
+        editIndex:undefined,
+        nameInput:'',
+        descInput:'',
+        buttonText:''
     }
 
     toggleInputHandler =()=>{
         if(this.state.input){
-            this.setState({input:false})
+            this.setState({
+                input:false,
+                buttonText:'',
+                edit:false,
+                nameInput:'',
+                descInput:''
+            })
+        } else if(!this.state.input&&this.state.edit){
+            this.setState({
+                input:true,
+                buttonText:'Add Item',
+                edit:false,
+                nameInput:'',
+                descInput:''
+            })
         } else if(!this.state.input){
-            this.setState({input:true})
+            this.setState({
+                input:true,
+                buttonText:'Add Item',
+                edit:false
+            })
         }
     }
 
-    inputNameHandler = (event)=>{
+    inputNameHandler = async (event)=>{
         const description = this.state.newItem.itemDesc
-        this.setState({
+       await this.setState({
             newItem:{
                 itemName:event.target.value,
-                itemDesc:description
-            }
+                itemDesc:description,
+            },
+            nameInput:event.target.value
+        })
+    }
+
+    inputDescHandler = async (event)=>{
+        const name = this.state.newItem.itemName
+        await this.setState({
+            newItem:{
+                itemName:name,
+                itemDesc:event.target.value,
+            },
+            descInput:event.target.value
         })
     }
 
@@ -36,32 +71,50 @@ class List extends Component{
         await this.props.indexInfo(this.state.itemIndex)
     }
 
-    inputDescHandler = (event)=>{
-        const name = this.state.newItem.itemName
-        this.setState({
-            newItem:{
-                itemName:name,
-                itemDesc:event.target.value
-            }
-        })
-    }
+    
 
-    addItemHandler = ()=>{
-        const oldState = {...this.state}
-        let newId = oldState.items.length
-        oldState.items.push({
-            id:newId, 
-            itemName:oldState.newItem.itemName,
-            itemDesc:oldState.newItem.itemDesc,
-            created:new Date().toISOString().slice(0,10)
-        })
-        this.setState({
-            items:oldState.items,
-            input:false,
-            newItem:{},
-            itemIndex:newId
-        })
-        this.passItemData()
+    addItemHandler = async ()=>{
+        if(!this.state.edit){
+            const oldState = {...this.state}
+            let newId = oldState.items.length
+            await oldState.items.push({
+                id:newId, 
+                itemName:oldState.newItem.itemName,
+                itemDesc:oldState.newItem.itemDesc,
+                created:new Date().toISOString().slice(0,10)
+            })
+            await this.setState({
+                items:oldState.items,
+                input:false,
+                newItem:{},
+                itemIndex:newId,
+                nameInput:'',
+                descInput:''
+            })
+            await this.passItemData()
+        } else {
+            const oldState = {...this.state}
+            
+            oldState.items.forEach((item,i)=>{
+            let newId= oldState.editIndex
+                if(i === newId){
+                    item.itemName=oldState.newItem.itemName
+                    item.itemDesc=oldState.newItem.itemDesc
+                    item.lastEdited=new Date().toISOString().slice(0,10)
+                }
+                this.setState({
+                    items:oldState.items,
+                    input:false,
+                    newItem:{},
+                    edit:false,
+                    editIndex:undefined,
+                    itemIndex:newId,
+                    nameInput:'',
+                    descInput:''
+                })
+            })
+            this.passItemData()
+        }
     }
 
     deleteItemHandler = async (itemIndex)=>{
@@ -74,6 +127,37 @@ class List extends Component{
             items:oldState.items
         })
         this.passItemData()
+    }
+
+    editItemHandler= async (itemIndex)=>{
+        if(this.state.edit){
+           await this.setState({
+                edit:false,
+                editIndex:undefined,
+                nameInput:'',
+                descInput:'',
+                buttonText:''
+            })
+        } else if(!this.state.edit){
+            let descInput='';
+            let nameInput='';
+            await this.state.items.forEach((item,i)=>{
+                if(i===itemIndex){
+                    descInput=item.itemDesc;
+                    nameInput=item.itemName;
+                    this.setState({
+                        input:false,
+                        edit:true,
+                        editIndex:itemIndex,
+                        nameInput:nameInput,
+                        descInput:descInput,
+                        itemIndex:itemIndex,
+                        buttonText:'Edit Item'
+                    })
+                }
+            })
+            
+        }
     }
 
     passItemData = async ()=>{
@@ -89,7 +173,23 @@ class List extends Component{
                 <Input 
                 changedName={this.inputNameHandler}
                 changedDesc={this.inputDescHandler}
-                addItem={this.addItemHandler}/>
+                addItem={this.addItemHandler}
+                nameInput={this.state.nameInput}
+                descInput={this.state.descInput}
+                buttonText={this.state.buttonText}/>
+             )
+         } 
+
+         let editElement = null
+         if(this.state.edit){
+            editElement=(
+                <Input 
+                changedName={this.inputNameHandler}
+                changedDesc={this.inputDescHandler}
+                addItem={this.addItemHandler}
+                nameInput={this.state.nameInput}
+                descInput={this.state.descInput}
+                buttonText={this.state.buttonText}/>
              )
          }
 
@@ -101,7 +201,10 @@ class List extends Component{
                         name={i.itemName}
                         key={index}
                         deleteClicked={()=>this.deleteItemHandler(index)}
-                        itemIndex={()=>this.itemIndexHandler(index)}/>
+                        itemIndex={()=>this.itemIndexHandler(index)}
+                        editInput={()=>this.editItemHandler(index)}
+                        editIndex={this.state.editIndex}
+                        editElement={editElement}/>
              })
          }
 
@@ -109,6 +212,7 @@ class List extends Component{
             <div>
                 <ListGroup>
                     {itemElement}
+                    {/*editElement*/}
                 </ListGroup>
                
                 <Button onClick={this.toggleInputHandler} size="sm">Add Items <FontAwesomeIcon icon='plus'/></Button>

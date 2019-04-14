@@ -6,6 +6,11 @@ import {ListGroupItem,CardTitle} from 'reactstrap'
 import classes from './items.module.css'
 
 const items = (props)=>{
+    let editElement = null
+    if(props.editIndex===props.id){
+        editElement = props.editElement
+    }
+
     return(
         <ListGroupItem>
             <CardTitle onClick={props.itemIndex}>{props.name}</CardTitle>
@@ -15,7 +20,7 @@ const items = (props)=>{
                 className={classes.button} 
                 color='warning' 
                 size='sm'
-                >
+                onClick={props.editInput}>
                     <FontAwesomeIcon icon='pen'/>
                 </Button>
                 <Button 
@@ -27,6 +32,7 @@ const items = (props)=>{
                     <FontAwesomeIcon icon='times-circle'/>
                 </Button>
             </div>
+            {editElement}
         </ListGroupItem>
         
     )

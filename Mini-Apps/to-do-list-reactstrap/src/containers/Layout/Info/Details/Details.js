@@ -8,6 +8,7 @@ const details = (props)=>{
             <CardTitle>
                 {props.title}
             </CardTitle>
+            <hr/>
             <CardText>
                 {props.desc}
             </CardText>

@@ -22,12 +22,12 @@ const info = (props)=>{
         )
     } else{
          itemDetails = (
-                            <Details 
-                            title="Title"
-                            desc="Description"
-                            key={null}
-                            date={null}/>
-                           ) 
+                        <Details 
+                        title="Title"
+                        desc="Description"
+                        key={null}
+                        date={null}/>
+                        ) 
     }
 
     return(
