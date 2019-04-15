@@ -1,1 +1,10 @@
-.items{font-family: 'Roboto Mono', monospace;}
+.items{
+    box-sizing:border-box;
+    font-family: 'Roboto Mono', monospace;
+    margin:auto;
+    width:100%;
+}
+
+.items ul li{
+    background-color:#c5eadb
+}

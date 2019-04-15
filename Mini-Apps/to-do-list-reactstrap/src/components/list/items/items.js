@@ -5,20 +5,27 @@ import {ListGroupItem,CardTitle} from 'reactstrap'
 
 import classes from './items.module.css'
 
-
-
 const items = (props)=>{
+
+    if(props.id.isEven){
+        
+    }
+
     let editElement = null
     if(props.editIndex===props.id){
         editElement = props.editElement
     }
 
     return(
-        <ListGroupItem>
+        <ListGroupItem >
+        <div className={classes.listGroup}>
             <CardTitle
             className={classes.items}
             onClick={props.itemIndex}>
+                <p>
                 {props.name}
+                </p>
+                
             </CardTitle>
             <hr/>
             <div>
@@ -39,6 +46,7 @@ const items = (props)=>{
                 </Button>
             </div>
             {editElement}
+            </div>
         </ListGroupItem>
         
     )

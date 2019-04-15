@@ -31,11 +31,11 @@ const info = (props)=>{
     }
 
     return(
-        <div>
+        
             <Card className={classes.info}>
                 {itemDetails}
             </Card>
-        </div>
+        
         
     )
 

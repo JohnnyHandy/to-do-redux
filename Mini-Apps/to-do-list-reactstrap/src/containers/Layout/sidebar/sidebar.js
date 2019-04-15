@@ -5,18 +5,13 @@ import {Card} from 'reactstrap'
 import List from '../../../components/list/list'
 
 const sidebar =(props)=>{
-    return(
-        <Card className={classes.sidebar}>
-            <Card>
-                List Sidebar
-            </Card>
-            <Card>
+    return(  
+            <Card className={classes.sidebar}>
                 <List
                 className={classes.List}
                 itemData={props.itemData}
                 indexInfo={props.indexInfo}/>
             </Card>
-        </Card>
     )
 }
 

@@ -124,8 +124,15 @@ class List extends Component{
         await oldState.items.forEach((item, index) => { 
             item.id = index 
         })
+        let newIndex=undefined
+        if(itemIndex-1>=0){
+            newIndex=itemIndex-1
+        } else if(oldState.items.length ===1){
+            newIndex=0
+        }
         await this.setState({
-            items:oldState.items
+            items:oldState.items,
+            itemIndex:newIndex
         })
         this.passItemData()
     }
@@ -213,12 +220,13 @@ class List extends Component{
          }
 
         return(
-            <div>
-                <ListGroup>
+            <div className={classes.items}>
+                <ListGroup> 
                     {itemElement}
                 </ListGroup>
-               
+               <hr/>
                 <Button 
+                className={classes.button}
                 onClick={this.toggleInputHandler} 
                 size="sm"
                 outline color='info'>

@@ -27,13 +27,14 @@ class Layout extends Component{
             <Container className={classes.Layout}>
                 <h1>To-Do-List</h1>
                 <CardGroup>
-                    <Card className={classes.cardgroup}>
+                    <Card className={classes.sideBar}>
                         <Sidebar
                         itemData={this.addItemInfo.bind(this)}
                         indexInfo={this.setIndexInfo.bind(this)}/>
                     </Card>
                     <Card>
                         <Info
+                        className={classes.Info}
                         itemData={this.state.items}
                         itemIndex={this.state.itemIndex}/>
                     </Card>

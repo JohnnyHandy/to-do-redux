@@ -1,12 +1,15 @@
 import React from 'react'
 
+import classes from './Details.module.css'
 import {CardBody,CardTitle,CardText} from 'reactstrap'
 
 const details = (props)=>{
     return(
-        <CardBody>
+        <CardBody className={classes.background} > 
             <CardTitle>
-                {props.title}
+                <p>
+                    {props.title}
+                </p>
             </CardTitle>
             <hr/>
             <CardText>

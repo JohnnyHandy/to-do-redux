@@ -8,12 +8,12 @@
     box-align: center;
 }
 
-.Sidebar{
-    width:40%;
+.sideBar{
+    background-color:#a7e2cb 
 }
 
 .Info{
-    width:60%
+    background-color:#d7d8a6
 }
 
 

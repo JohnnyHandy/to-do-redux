@@ -1,12 +1,14 @@
 .sidebar{
-    width:50%;
+    width:100%;
     height:100%;
     box-sizing: border-box;
     border: 1px solid lightsteelblue;
     text-align:center;
-    margin:auto
+    margin:auto;
+    background-color:#a7e2cb !important
 }
 
 .List{
-    margin:0
+    margin:0;
+    background-color:#a7e2cb
 }
