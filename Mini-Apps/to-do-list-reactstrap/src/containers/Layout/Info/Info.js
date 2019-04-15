@@ -31,9 +31,12 @@ const info = (props)=>{
     }
 
     return(
-        <Card className={classes.info}>
-            {itemDetails}
-        </Card>
+        <div>
+            <Card className={classes.info}>
+                {itemDetails}
+            </Card>
+        </div>
+        
     )
 
 }

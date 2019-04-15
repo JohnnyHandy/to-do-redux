@@ -5,7 +5,6 @@ import {Input,Button} from 'reactstrap'
 
 const input =(props)=>{
 
-
     return(
         <div className={classes.Input}>
             <Input 

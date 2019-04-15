@@ -12,6 +12,7 @@ const sidebar =(props)=>{
             </Card>
             <Card>
                 <List
+                className={classes.List}
                 itemData={props.itemData}
                 indexInfo={props.indexInfo}/>
             </Card>

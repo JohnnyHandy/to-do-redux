@@ -5,6 +5,8 @@ import {ListGroupItem,CardTitle} from 'reactstrap'
 
 import classes from './items.module.css'
 
+
+
 const items = (props)=>{
     let editElement = null
     if(props.editIndex===props.id){
@@ -13,7 +15,11 @@ const items = (props)=>{
 
     return(
         <ListGroupItem>
-            <CardTitle onClick={props.itemIndex}>{props.name}</CardTitle>
+            <CardTitle
+            className={classes.items}
+            onClick={props.itemIndex}>
+                {props.name}
+            </CardTitle>
             <hr/>
             <div>
                 <Button

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import classes from './list.module.css'
 import {Button,ListGroup} from 'reactstrap'
 import Input from '../UI/Input/Input'
 import Items from './items/items'
@@ -197,6 +198,7 @@ class List extends Component{
          if(this.state.items.length !== 0 ){
              itemElement = this.state.items.map((i,index)=>{
                  return <Items
+                        className={classes.items}
                         id={i.id}
                         name={i.itemName}
                         key={index}
@@ -206,16 +208,23 @@ class List extends Component{
                         editIndex={this.state.editIndex}
                         editElement={editElement}/>
              })
+         }else{
+             itemElement = <h4 className={classes.items}>Please add an Item</h4>
          }
 
         return(
             <div>
                 <ListGroup>
                     {itemElement}
-                    {/*editElement*/}
                 </ListGroup>
                
-                <Button onClick={this.toggleInputHandler} size="sm">Add Items <FontAwesomeIcon icon='plus'/></Button>
+                <Button 
+                onClick={this.toggleInputHandler} 
+                size="sm"
+                outline color='info'>
+                    Add Items 
+                    <FontAwesomeIcon icon='plus'/>
+                </Button>
                 {inputElement}
             </div>
         )
