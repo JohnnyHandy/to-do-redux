@@ -224,7 +224,7 @@ class List extends Component{
                 <ListGroup> 
                     {itemElement}
                 </ListGroup>
-               <hr/>
+               <hr className={classes.hr}/>
                 <Button 
                 className={classes.button}
                 onClick={this.toggleInputHandler} 
