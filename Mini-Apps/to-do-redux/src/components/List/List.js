@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {connect} from 'react-redux'
 
 import classes from './List.module.css'
 import {Button,ListGroup} from 'reactstrap'
@@ -15,8 +16,8 @@ class List extends Component{
         itemIndex:0,
         edit:false,
         editIndex:undefined,
-        nameInput:'',
-        descInput:'',
+        // nameInput:'',
+        // descInput:'',
         buttonText:''
     }
 
@@ -180,7 +181,8 @@ class List extends Component{
          if(this.state.input){
              inputElement=(
                 <Input 
-                changedName={this.inputNameHandler}
+                changedName={this.props.changedName}
+                // changedName={this.inputNameHandler}
                 changedDesc={this.inputDescHandler}
                 addItem={this.addItemHandler}
                 nameInput={this.state.nameInput}
@@ -240,4 +242,16 @@ class List extends Component{
     }
 }
 
-export default List
+const mapStateToProps = state =>{
+    return{
+        itm:state.items
+    }
+}
+
+const mapDispatchToProps = dispatch=>{
+    return{
+        changedName:(event)=>dispatch({type:'changedName', payload:event.target.value})
+    };
+}
+
+export default connect(null, mapDispatchToProps)(List)
