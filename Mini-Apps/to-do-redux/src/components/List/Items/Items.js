@@ -7,9 +7,6 @@ import classes from './Items.module.css'
 
 const Items = (props)=>{
 
-    if(props.id.isEven){
-        
-    }
 
     let editElement = null
     if(props.editIndex===props.id){

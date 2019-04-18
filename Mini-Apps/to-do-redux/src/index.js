@@ -9,6 +9,10 @@ import reducer from './store/reducer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(reducer);
+store.subscribe(()=>{
+    console.log(['Subscription'], store.getState())
+})
+
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

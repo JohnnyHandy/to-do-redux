@@ -182,9 +182,11 @@ class List extends Component{
              inputElement=(
                 <Input 
                 changedName={this.props.changedName}
+                changedDesc={this.props.changedDesc}
+                addItem={this.props.addItem}
                 // changedName={this.inputNameHandler}
-                changedDesc={this.inputDescHandler}
-                addItem={this.addItemHandler}
+                // changedDesc={this.inputDescHandler}
+                // addItem={this.addItemHandler}
                 nameInput={this.state.nameInput}
                 descInput={this.state.descInput}
                 buttonText={this.state.buttonText}/>
@@ -205,14 +207,16 @@ class List extends Component{
          }
 
          let itemElement = null
-         if(this.state.items.length !== 0 ){
-             itemElement = this.state.items.map((i,index)=>{
+         if(this.props.items.length !== 0 ){
+             console.log(this.props.items)
+             itemElement = this.props.items.map((i,index)=>{
                  return <Items
                         className={classes.items}
                         id={i.id}
                         name={i.itemName}
                         key={index}
-                        deleteClicked={()=>this.deleteItemHandler(index)}
+                        deleteClicked={()=>this.props.deleteItem(index)}
+                        // deleteClicked={()=>this.deleteItemHandler(index)}
                         itemIndex={()=>this.itemIndexHandler(index)}
                         editInput={()=>this.editItemHandler(index)}
                         editIndex={this.state.editIndex}
@@ -244,14 +248,17 @@ class List extends Component{
 
 const mapStateToProps = state =>{
     return{
-        itm:state.items
+        items:state.items
     }
 }
 
 const mapDispatchToProps = dispatch=>{
     return{
-        changedName:(event)=>dispatch({type:'changedName', payload:event.target.value})
+        changedName:(event)=>dispatch({type:'CHANGED_NAME', payload:event.target.value}),
+        changedDesc:(event)=>dispatch({type:'CHANGED_DESC',payload:event.target.value}),
+        addItem:()=>dispatch({type:'ADD_ITEM'}),
+        deleteItem:(index)=>dispatch({type:'DELETE_ITEM',index:index})
     };
 }
 
-export default connect(null, mapDispatchToProps)(List)
+export default connect(mapStateToProps, mapDispatchToProps)(List)
