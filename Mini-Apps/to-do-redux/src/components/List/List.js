@@ -148,7 +148,7 @@ class List extends Component{
                 descInput:'',
                 buttonText:''
             })
-        } else if(!this.state.edit){
+        } else if(this.state.edit===false){
             let descInput='';
             let nameInput='';
             await this.state.items.forEach((item,i)=>{
@@ -178,7 +178,7 @@ class List extends Component{
 
     render(){
         let inputElement = null
-         if(this.state.input){
+         if(this.props.input){
              inputElement=(
                 <Input 
                 changedName={this.props.changedName}
@@ -189,7 +189,7 @@ class List extends Component{
                 // addItem={this.addItemHandler}
                 nameInput={this.state.nameInput}
                 descInput={this.state.descInput}
-                buttonText={this.state.buttonText}/>
+                buttonText={this.props.state.buttonText}/>
              )
          } 
 
@@ -202,13 +202,12 @@ class List extends Component{
                 addItem={this.addItemHandler}
                 nameInput={this.state.nameInput}
                 descInput={this.state.descInput}
-                buttonText={this.state.buttonText}/>
+                buttonText={this.props.state.buttonText}/>
              )
          }
 
          let itemElement = null
          if(this.props.items.length !== 0 ){
-             console.log(this.props.items)
              itemElement = this.props.items.map((i,index)=>{
                  return <Items
                         className={classes.items}
@@ -216,8 +215,7 @@ class List extends Component{
                         name={i.itemName}
                         key={index}
                         deleteClicked={()=>this.props.deleteItem(index)}
-                        // deleteClicked={()=>this.deleteItemHandler(index)}
-                        itemIndex={()=>this.itemIndexHandler(index)}
+                        itemIndex={()=>this.props.itemIndexChanger(index)}
                         editInput={()=>this.editItemHandler(index)}
                         editIndex={this.state.editIndex}
                         editElement={editElement}/>
@@ -234,7 +232,7 @@ class List extends Component{
                <hr className={classes.hr}/>
                 <Button 
                 className={classes.button}
-                onClick={this.toggleInputHandler} 
+                onClick={this.props.toggleInputHandler} 
                 size="sm"
                 outline color='info'>
                     Add Items 
@@ -248,16 +246,20 @@ class List extends Component{
 
 const mapStateToProps = state =>{
     return{
-        items:state.items
+        items:state.items,
+        input:state.input,
+        state:state
     }
 }
 
 const mapDispatchToProps = dispatch=>{
     return{
+        toggleInputHandler:()=>dispatch({type:'TOGGLE_INPUT_HANDLER'}),
         changedName:(event)=>dispatch({type:'CHANGED_NAME', payload:event.target.value}),
         changedDesc:(event)=>dispatch({type:'CHANGED_DESC',payload:event.target.value}),
         addItem:()=>dispatch({type:'ADD_ITEM'}),
-        deleteItem:(index)=>dispatch({type:'DELETE_ITEM',index:index})
+        deleteItem:(index)=>dispatch({type:'DELETE_ITEM',index:index}),
+        itemIndexChanger:(index)=>dispatch({type:'CHANGE_ITEM_INDEX',index:index})
     };
 }
 

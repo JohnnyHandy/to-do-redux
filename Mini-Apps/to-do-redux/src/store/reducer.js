@@ -1,9 +1,9 @@
 const initialState ={
     items:[],
     newItem:{},
-    input:false,
+    input:undefined,
     itemIndex:0,
-    edit:false,
+    edit:undefined,
     editIndex:undefined,
     nameInput:'',
     descInput:'',
@@ -47,6 +47,7 @@ const reducer = (state=initialState,action)=>{
             itemIndex:newId,
             nameInput:'',
             descInput:'',
+            buttonText:''
         }
     }
     if(action.type==='DELETE_ITEM'){
@@ -59,9 +60,20 @@ const reducer = (state=initialState,action)=>{
 
         }
     }
-
+    if(action.type==='CHANGE_ITEM_INDEX'){
+        return{
+            ...state,
+            itemIndex:action.index
+        }
+    }
+    if(action.type==='TOGGLE_INPUT_HANDLER'){
+        return{
+            ...state,
+            input:true,
+            buttonText:'Add Item'
+        }
+    }
     return state
-    
 }
 
 export default reducer
