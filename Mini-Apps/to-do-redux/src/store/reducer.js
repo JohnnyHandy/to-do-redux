@@ -17,7 +17,8 @@ const reducer = (state=initialState,action)=>{
             newItem:{
                 ...state.newItem,
                 itemName:action.payload
-            }
+            },
+            nameInput:action.payload
         }) 
     }
     if(action.type==='CHANGED_DESC'){
@@ -26,7 +27,8 @@ const reducer = (state=initialState,action)=>{
             newItem:{
                 ...state.newItem,
                 itemDesc:action.payload
-            }
+            },
+            descInput:action.payload
         })
     }
     if(action.type==='ADD_ITEM'){
@@ -44,6 +46,7 @@ const reducer = (state=initialState,action)=>{
             ],
             newItem:{},
             input:false,
+            edit:false,
             itemIndex:newId,
             nameInput:'',
             descInput:'',
@@ -60,6 +63,47 @@ const reducer = (state=initialState,action)=>{
 
         }
     }
+    if(action.type==='EDIT_ITEM_HANDLER'){
+        let itemName=''
+        let itemDesc=''
+        state.items.map((item,index)=>{
+            if(index === action.index){
+                itemName=item.itemName
+                itemDesc=item.itemDesc
+            }
+        })
+        return{
+            ...state,
+            nameInput:itemName,
+            descInput:itemDesc,
+            newItem:{
+                ...state.newItem,
+                itemName:itemName,
+                itemDesc:itemDesc
+            },
+            edit:true,
+            input:false,
+            buttonText:'Edit Item',
+            editIndex:action.index
+        }
+    }
+    if(action.type==='EDIT_ITEM'){
+        return{
+            ...state,
+            items:[].map((item,index)=>{
+                if(index===state.editIndex){
+                    return({...item,itemName:state.newItem.itemName, itemDesc:state.newItem.itemDesc})
+                }
+            }),
+            edit:false,
+            nameInput:'',
+            descInput:'',
+            editIndex:undefined,
+            edit:false,
+            newItem:{},
+            input:false
+        }
+    }
     if(action.type==='CHANGE_ITEM_INDEX'){
         return{
             ...state,
@@ -67,13 +111,21 @@ const reducer = (state=initialState,action)=>{
         }
     }
     if(action.type==='TOGGLE_INPUT_HANDLER'){
+        let input = undefined
+        let buttonText = ''
+        if(state.input === true){
+             input=false
+             buttonText = ''
+        } else{
+             input = true
+             buttonText = 'Add Item'
+        }
         return{
             ...state,
-            input:true,
-            buttonText:'Add Item'
+            input:input,
+            buttonText:buttonText
         }
     }
     return state
 }
-
 export default reducer

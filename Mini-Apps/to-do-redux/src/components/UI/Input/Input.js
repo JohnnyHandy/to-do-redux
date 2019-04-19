@@ -4,6 +4,7 @@ import classes from './Input.module.css'
 import {Input,Button} from 'reactstrap'
 
 const input =(props)=>{
+    let onClickHandle = null
 
     return(
         <div className={classes.Input}>
@@ -12,14 +13,14 @@ const input =(props)=>{
             type="text" 
             className={classes.inputElement} 
             placeholder='Item Name'
-            value={props.nameInput}/>
+            defaultValue={props.nameInput}/>
             <Input 
             onChange={props.changedDesc} 
             type='textarea' 
             className={classes.inputElement} 
             placeholder='Item Description'
-            value={props.descInput}/>
-            <Button onClick={props.addItem} size='sm'>
+            defaultValue={props.descInput}/>
+            <Button onClick={props.addOrEdit} size='sm'>
                 {props.buttonText}
             </Button>
         </div>

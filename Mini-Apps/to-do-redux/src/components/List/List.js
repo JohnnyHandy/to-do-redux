@@ -183,25 +183,25 @@ class List extends Component{
                 <Input 
                 changedName={this.props.changedName}
                 changedDesc={this.props.changedDesc}
-                addItem={this.props.addItem}
+                addOrEdit={this.props.addItem}
                 // changedName={this.inputNameHandler}
                 // changedDesc={this.inputDescHandler}
                 // addItem={this.addItemHandler}
-                nameInput={this.state.nameInput}
-                descInput={this.state.descInput}
+                nameInput={this.props.state.nameInput}
+                descInput={this.props.state.descInput}
                 buttonText={this.props.state.buttonText}/>
              )
          } 
 
          let editElement = null
-         if(this.state.edit){
+         if(this.props.state.edit){
             editElement=(
                 <Input 
-                changedName={this.inputNameHandler}
-                changedDesc={this.inputDescHandler}
-                addItem={this.addItemHandler}
-                nameInput={this.state.nameInput}
-                descInput={this.state.descInput}
+                changedName={this.props.inputNameHandler}
+                changedDesc={this.props.inputDescHandler}
+                addOrEdit={this.props.editItem}
+                nameInput={this.props.state.nameInput}
+                descInput={this.props.state.descInput}
                 buttonText={this.props.state.buttonText}/>
              )
          }
@@ -216,8 +216,8 @@ class List extends Component{
                         key={index}
                         deleteClicked={()=>this.props.deleteItem(index)}
                         itemIndex={()=>this.props.itemIndexChanger(index)}
-                        editInput={()=>this.editItemHandler(index)}
-                        editIndex={this.state.editIndex}
+                        editInput={()=>this.props.editItemHandler(index)}
+                        editIndex={this.props.state.editIndex}
                         editElement={editElement}/>
              })
          }else{
@@ -259,6 +259,8 @@ const mapDispatchToProps = dispatch=>{
         changedDesc:(event)=>dispatch({type:'CHANGED_DESC',payload:event.target.value}),
         addItem:()=>dispatch({type:'ADD_ITEM'}),
         deleteItem:(index)=>dispatch({type:'DELETE_ITEM',index:index}),
+        editItemHandler:(index)=>dispatch({type:'EDIT_ITEM_HANDLER',index:index}),
+        editItem:()=>dispatch({type:'EDIT_ITEM'}),
         itemIndexChanger:(index)=>dispatch({type:'CHANGE_ITEM_INDEX',index:index})
     };
 }
