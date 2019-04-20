@@ -184,9 +184,6 @@ class List extends Component{
                 changedName={this.props.changedName}
                 changedDesc={this.props.changedDesc}
                 addOrEdit={this.props.addItem}
-                // changedName={this.inputNameHandler}
-                // changedDesc={this.inputDescHandler}
-                // addItem={this.addItemHandler}
                 nameInput={this.props.state.nameInput}
                 descInput={this.props.state.descInput}
                 buttonText={this.props.state.buttonText}/>
@@ -197,8 +194,8 @@ class List extends Component{
          if(this.props.state.edit){
             editElement=(
                 <Input 
-                changedName={this.props.inputNameHandler}
-                changedDesc={this.props.inputDescHandler}
+                changedName={this.props.changedName}
+                changedDesc={this.props.changedDesc}
                 addOrEdit={this.props.editItem}
                 nameInput={this.props.state.nameInput}
                 descInput={this.props.state.descInput}
@@ -207,11 +204,12 @@ class List extends Component{
          }
 
          let itemElement = null
-         if(this.props.items.length !== 0 ){
+
+         if(this.props.items && this.props.items.length !== 0 ){
              itemElement = this.props.items.map((i,index)=>{
                  return <Items
                         className={classes.items}
-                        id={i.id}
+                        id={index}
                         name={i.itemName}
                         key={index}
                         deleteClicked={()=>this.props.deleteItem(index)}

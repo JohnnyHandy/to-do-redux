@@ -90,16 +90,15 @@ const reducer = (state=initialState,action)=>{
     if(action.type==='EDIT_ITEM'){
         return{
             ...state,
-            items:[].map((item,index)=>{
+            items:[...state.items].map((item,index)=>{
                 if(index===state.editIndex){
-                    return({...item,itemName:state.newItem.itemName, itemDesc:state.newItem.itemDesc})
+                    return ({...item,itemName:state.newItem.itemName,itemDesc:state.newItem.itemDesc})
                 }
             }),
             edit:false,
             nameInput:'',
             descInput:'',
             editIndex:undefined,
-            edit:false,
             newItem:{},
             input:false
         }

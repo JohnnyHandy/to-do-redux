@@ -4,7 +4,6 @@ import classes from './Input.module.css'
 import {Input,Button} from 'reactstrap'
 
 const input =(props)=>{
-    let onClickHandle = null
 
     return(
         <div className={classes.Input}>
