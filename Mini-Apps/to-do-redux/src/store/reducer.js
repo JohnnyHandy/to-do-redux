@@ -66,6 +66,12 @@ const reducer = (state=initialState,action)=>{
     if(action.type==='EDIT_ITEM_HANDLER'){
         let itemName=''
         let itemDesc=''
+        let edit=null
+        if(state.edit===true){
+            edit=undefined
+        } else{
+            edit=true
+        }
         state.items.map((item,index)=>{
             if(index === action.index){
                 itemName=item.itemName
@@ -81,7 +87,7 @@ const reducer = (state=initialState,action)=>{
                 itemName:itemName,
                 itemDesc:itemDesc
             },
-            edit:true,
+            edit:edit,
             input:false,
             buttonText:'Edit Item',
             editIndex:action.index
@@ -89,10 +95,17 @@ const reducer = (state=initialState,action)=>{
     }
     if(action.type==='EDIT_ITEM'){
         return{
-            ...state,
+            ...state.items,
             items:[...state.items].map((item,index)=>{
                 if(index===state.editIndex){
-                    return ({...item,itemName:state.newItem.itemName,itemDesc:state.newItem.itemDesc})
+                    return ({
+                        ...item,
+                        itemName:state.newItem.itemName,
+                        itemDesc:state.newItem.itemDesc,
+                        lastEdited:new Date().toISOString().slice(0,10)
+                    })
+                } else{
+                    return ({...item})
                 }
             }),
             edit:false,
