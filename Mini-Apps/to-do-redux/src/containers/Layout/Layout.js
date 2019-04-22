@@ -1,26 +1,13 @@
 import React, {Component} from 'react'
 import {Container, Card, CardGroup} from 'reactstrap'
+import {connect} from 'react-redux'
+
 
 import Sidebar from './Sidebar/Sidebar'
 import Info from './Info/Info'
 import classes from './Layout.module.css'
 
 class Layout extends Component{
-    
-    state={
-        items:[],
-        itemIndex:0
-    }
-
-    addItemInfo = async (itemData)=> {
-        await this.setState({items:itemData})
-        console.log(this.state.items)
-        }
-    setIndexInfo = async (index)=>{
-        await this.setState({itemIndex:index})
-        console.log("index received=> "+ this.state.itemIndex)
-    }    
-    
 
     render(){
         return(
@@ -28,15 +15,13 @@ class Layout extends Component{
                 <h1>To-Do-List</h1>
                 <CardGroup>
                     <Card className={classes.sideBar}>
-                        <Sidebar
-                        itemData={this.addItemInfo.bind(this)}
-                        indexInfo={this.setIndexInfo.bind(this)}/>
+                        <Sidebar/>
                     </Card>
                     <Card>
                         <Info
                         className={classes.Info}
-                        itemData={this.state.items}
-                        itemIndex={this.state.itemIndex}/>
+                        itemData={this.props.items}
+                        itemIndex={this.props.itemIndex}/>
                     </Card>
                 </CardGroup>
             </Container>
@@ -44,4 +29,11 @@ class Layout extends Component{
     } 
 }
 
-export default Layout
+const mapStateToProps = state =>{
+    return{
+        items:state.items,
+        itemIndex:state.itemIndex
+    }
+}
+
+export default connect(mapStateToProps)(Layout)

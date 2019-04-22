@@ -13,9 +13,11 @@ const Info = (props)=>{
                     return <Details
                             title={i.itemName}
                             desc={i.itemDesc}
-                            date={'Created on '+i.created}
+                            date={"Created at "+i.created}
+                            edited={i.lastEdited}
                             key={index}/> 
                 }
+            return null
             })
         )
     } else{

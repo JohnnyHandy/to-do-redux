@@ -41,7 +41,8 @@ const reducer = (state=initialState,action)=>{
                     id:newId,
                     itemName:state.newItem.itemName,
                     itemDesc:state.newItem.itemDesc,
-                    created:new Date().toISOString().slice(0,10)
+                    created:new Date().toISOString().slice(0,10),
+                    lastEdited:undefined
                 }
             ],
             newItem:{},
@@ -54,13 +55,19 @@ const reducer = (state=initialState,action)=>{
         }
     }
     if(action.type==='DELETE_ITEM'){
+        let newIndex = action.index
+        if(action.index > 0){
+            newIndex = action.index-1
+        } else {
+            newIndex = 0
+        }
         return{
             ...state,
             items:[
                 ...state.items.slice(0,action.index),
                 ...state.items.slice(action.index+1)
-            ].map((item, index) => ({ ...item, id: index }))
-
+            ].map((item, index) => ({ ...item, id: index })),
+            itemIndex:newIndex
         }
     }
     if(action.type==='EDIT_ITEM_HANDLER'){
@@ -77,6 +84,7 @@ const reducer = (state=initialState,action)=>{
                 itemName=item.itemName
                 itemDesc=item.itemDesc
             }
+            return null
         })
         return{
             ...state,
@@ -120,6 +128,26 @@ const reducer = (state=initialState,action)=>{
         return{
             ...state,
             itemIndex:action.index
+        }
+    }
+    if(action.type === 'INDEX_DOWN'){
+        let newIndex = state.itemIndex
+        if(newIndex > 0){
+            newIndex = newIndex-1
+        }
+        return{
+            ...state,
+            itemIndex:newIndex
+        }
+    }
+    if(action.type === 'INDEX_UP'){
+        let newIndex = state.itemIndex
+        if(newIndex < state.items.length-1){
+            newIndex=newIndex+1
+        }
+        return{
+            ...state,
+            itemIndex:newIndex
         }
     }
     if(action.type==='TOGGLE_INPUT_HANDLER'){

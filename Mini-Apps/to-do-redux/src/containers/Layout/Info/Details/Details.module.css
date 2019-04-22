@@ -1,3 +1,16 @@
 .background{
     background-color:#d7d8a6
 }
+
+.created{
+    font-style: italic;
+    color:lightslategray;
+}
+
+.arrowLeft{
+    float:left
+}
+
+.arrowRight{
+    float:right
+}

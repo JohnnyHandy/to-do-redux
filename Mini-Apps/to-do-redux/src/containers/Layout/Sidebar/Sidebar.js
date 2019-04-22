@@ -8,9 +8,7 @@ const Sidebar = (props)=>{
     return(  
         <Card className={classes.sidebar}>
             <List
-            className={classes.List}
-            itemData={props.itemData}
-            indexInfo={props.indexInfo}/>
+            className={classes.List}/>
         </Card>
     )
 }
