@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from 'react-redux'
+import axios from '../../axios'
 
 import classes from './List.module.css'
 import {Button,ListGroup} from 'reactstrap'
@@ -9,6 +10,16 @@ import Items from './Items/Items'
 
 
 class List extends Component{
+
+    componentDidMount() {
+        axios.get('https://to-do-list-299ec.firebaseio.com/list/items.json')
+        .then(response=>{
+           console.log("response.data")
+           console.log(response.data)
+           this.props.initialState()
+        }).catch(error=>console.log(error))
+      }
+
     render(){
         let inputElement = null
          if(this.props.input){
@@ -92,7 +103,8 @@ const mapDispatchToProps = dispatch=>{
         deleteItem:(index)=>dispatch({type:'DELETE_ITEM',index:index}),
         editItemHandler:(index)=>dispatch({type:'EDIT_ITEM_HANDLER',index:index}),
         editItem:()=>dispatch({type:'EDIT_ITEM'}),
-        itemIndexChanger:(index)=>dispatch({type:'CHANGE_ITEM_INDEX',index:index})
+        itemIndexChanger:(index)=>dispatch({type:'CHANGE_ITEM_INDEX',index:index}),
+        initialState:(value)=>dispatch({type:'SET_STATE',payload:value})
     };
 }
 

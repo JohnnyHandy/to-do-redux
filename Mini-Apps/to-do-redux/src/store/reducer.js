@@ -1,3 +1,4 @@
+
 const initialState ={
     items:[],
     newItem:{},
@@ -11,6 +12,12 @@ const initialState ={
 }
 
 const reducer = (state=initialState,action)=>{
+    if(action.type==='SET_STATE'){
+        return({
+            ...state,
+            items:action.payload
+        })
+    }
     if(action.type === 'CHANGED_NAME'){
         return({
             ...state,
