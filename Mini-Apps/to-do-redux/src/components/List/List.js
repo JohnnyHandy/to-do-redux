@@ -113,15 +113,6 @@ const mapDispatchToProps = dispatch=>{
     };
 }
 
-// const mergeProps = (stateProps,disPatchProps,ownProps)=>{
-//     const addItem =()=>{
-//         disPatchProps.addItem(stateProps.items)
-//     }
-//     return({
-//         ...stateProps,
-//         ...disPatchProps,
-//         addItem
-//     })
-// }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)
