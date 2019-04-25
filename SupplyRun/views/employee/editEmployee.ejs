@@ -1,0 +1,62 @@
+<% include ../partials/header %>
+
+<h1>Manage Employee Info</h1>
+
+<form action="/employees/<%=user._id%>?_method=PUT"  method="post">
+    <label for="firstname">First Name</label>
+    <div class="form-group">
+      <input class="form-control" id="firstname" type="text" name="user[firstname]" value='<%=user.firstname%>' >
+    </div>
+    <label for="lastname">Last Name</label>
+    <div class="form-group">
+      <input id="lastname" class="form-control" type="text" name="user[lastname]" value='<%=user.lastname%>' >
+    </div>
+    <label for="birth">Date of Birth</label>
+    <div class="form-group">
+      <input id="birth" class="form-control" type="date" name="user[birth]" value='<%=user.birth%>'>
+    </div>
+    <label for="adress">Adress</label>
+    <div class="form-group">
+      <input id="adress" class="form-control"  type="text" name="user[adress]" value='<%=user.adress%>'>
+    </div>
+    <label for="education">Education</label>
+    <div class="form-group">
+      <select id-"education" name="user[education]" value='<%=user.education%>'>
+        <option value="middle-school">Middle School</option>
+        <option value="HighSchool">HighSchool</option>
+        <option value="College">College Education</option>
+        <option value="Universityi">University</option>
+      </select>
+    </div>
+    <label for="experience">Experience</label>
+    <div class="form-group">
+      <textarea id="experience" class="form-control" type="text" name="user[experience]" value="<%=user.experience%>"></textarea>
+    </div>
+    <label for="role">Role</label>
+    <div class="form-group">
+     <select id-"role" name="user[role]" value='<%=user.role%>'>
+        <option value="Truck Driver">Truck Driver</option>
+        <option value="Office">Office</option>
+        <option value="Shed Manager">Shed Manager</option>
+        <option value="ForkLift Operator">ForkLift Operator</option>
+        <option value="Cleaning Services">Cleaning Services</option>
+        <option value="Cooker">Cooker</option>
+        <option value="Manager">Manager</option>
+        <option value="IT"> IT </option>
+      </select>
+    </div>
+    <label for="username">Username</label>
+    <div class="form-group">
+      <input id="username" class="form-control" type="text" name="user[username]" value='<%=user.username%>'>
+    </div>
+    <label for="password">Password</label>
+    <div class="form-group">
+      <input id="password" class="form-control" type="password" name="user[password]" placeholder="Insert Employee's login password">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-lg btn-primary btn-block">Save</button>
+    </div>
+</form>
+
+
+<% include ../partials/footer %>

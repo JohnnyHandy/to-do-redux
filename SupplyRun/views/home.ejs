@@ -1,0 +1,15 @@
+<% include partials/header %>
+
+<% if(currentUser && currentUser.isAdmin) { %>
+    <h2>You are an admin</h2>
+    <% } else if(currentUser) { %>
+    <h2><%=currentUser.username %> </h2>
+    <h2>Account type <%=currentUser.accountType %></h2>
+    <% } else {%>
+    <h2>False</h2>
+    <% } %>
+
+<h1>Supply run</h1>
+
+
+<% include partials/footer %>

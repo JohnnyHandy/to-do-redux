@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+
+<h1>Add new car</h1>
+
+<form action="/newcar" method="post">
+    <label for="carmanufacturer">Manufacturer</label>
+    <div class="form-group">
+        <select name="manufacturer" id="carmanufacturer">
+            <option value="Mercedes-Benz"> Mercedes Benz </option>
+            <option value-"Volkswagens">Volkswagen </option>
+            <option value="Ford"> Ford</option>
+            <option value="Volvo"> General Motors</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="Nissan">Nissan</option>
+            <option value="Fiat-Chrysler">Fiat-Chrysler</option>
+            <option value="Pegeot-Citroen">Pegeot-Citroen</option>
+            <option value="Honda">Honda</option>
+            <option value="Renault">Renault</option>
+            <option value="BMW">BMW</option>
+        </select>
+    </div>
+    
+    <label for="model">Model</label>
+    <div class="form-group">
+        <input type="text" id="model" name="model" class="form-control" placeholder="Insert Truck's model">
+    </div>
+    <div class="form-group">
+        <input type="text" id="plate" name="plate" class="form-control" placeholder="Insert Plate here">
+    </div>
+     <div class="form-group">
+      <button class="btn btn-lg btn-primary btn-block">Register Car</button>
+    </div>
+    
+    
+    
+</form>
+
+
+<% include ../partials/footer %>

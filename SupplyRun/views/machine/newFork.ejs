@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<h1>Add new Fork-Lift</h1>
+
+<form action="/newfork" method="post">
+    <label for="forkmanufacturer">Truck Manufacturer</label>
+    <div class="form-group">
+        <select name="manufacturer" id="forkmanufacturer">
+            <option value="Toyota"> Toyota </option>
+            <option value-"KION">KION </option>
+            <option value="Jungheinrich"> Jungheinrich</option>
+            <option value="Hyster"> Hyster</option>
+            <option value="Crown">Crown</option>
+            <option value="Mitsubishi">Mitsubishi</option>
+            <option value="Unicarriers">Unicarriers</option>
+            <option value="Anhui">Anhui</option>
+            <option value="Hangcha">Hangcha</option>
+            <option value="Komatsu">Komatsu</option>
+        </select>
+    </div>
+    
+    <label for="model">Model</label>
+    <div class="form-group">
+        <input type="text" id="model" name="model" class="form-control" placeholder="Insert Fork-Lift's model">
+    </div>
+    <label for="plate">Plate</label>
+    <div class="form-group">
+        <input type="text" id="plate" name="plate" class="form-control" placeholder="Insert Plate here">
+    </div>
+     <div class="form-group">
+      <button class="btn btn-lg btn-primary btn-block">Register new Fork-Lift</button>
+    </div>
+    
+    
+    
+</form>
+
+
+<% include ../partials/footer %>

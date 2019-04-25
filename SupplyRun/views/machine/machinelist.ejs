@@ -1,0 +1,113 @@
+<% include ../partials/header %>
+
+<h1>Machine Inventary</h1>
+<hr>
+<table>
+    <thead>
+        <tr><h3>Registered Trucks</h3></tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Model</th>
+            <th scope="col">Plate Number</th>
+            <th scope="col">Operation Start</th>
+            <th scope="col">Current Job</th>
+            <th scope="col">Current Driver</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% count = 0 %>
+        <% machine.forEach(function(machine){ %>
+        
+            <% if(machine.isTruck){ %>
+            <% count= count+1 %>
+            <tr>
+                <th scope="col"><%=count%></th>
+                <th scope="col"><%=machine.manufacturer%></th>
+                <th scope="col"><%=machine.model%></th>
+                <th scope="col"><%=machine.plate%></th>
+                <% var d = machine.operationStart; 
+                    date = d.toISOString().toString();
+                    var formattedDate = date.substring(0, date.lastIndexOf(".")); %>
+                <th scope="col"><%=formattedDate%></th>
+                <th scope="col"><%=machine.currentJob%></th></th>
+                <th scope="col"><%=machine.currentDriver%></th>
+            </tr>
+            <% } %>
+        <% })%>
+    </tbody>
+</table>
+<hr>
+<table>
+    <thead>
+        <tr><h3>Registered Cars</h3></tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Model</th>
+            <th scope="col">Plate Number</th>
+            <th scope="col">Operation Start</th>
+            <th scope="col">Current Job</th>
+            <th scope="col">Current Driver</th>  
+        </tr>
+    </thead>
+    <tbody>
+        <% count1=0 %>
+        <%machine.forEach(function(machine){ %>
+            <% if(machine.isCar){ %>
+                <% count1 = count1+1 %>
+                <tr>
+                    <th scope="col"><%=count1%></th>
+                    <th scope="col"><%=machine.manufacturer%></th>
+                    <th scope="col"><%=machine.model%></th>
+                    <th scope="col"><%=machine.plate%></th>
+                    <% var d = machine.operationStart; 
+                    date = d.toISOString().toString();
+                    var formattedDate = date.substring(0, date.lastIndexOf(".")); %>
+                    <th scope="col"><%=formattedDate%></th>
+                    <th scope="col"><%=machine.currentJob%></th></th>
+                    <th scope="col"><%=machine.currentDriver%></th>
+                </tr>
+           <% } %>
+       <% }) %>
+    </tbody>
+</table>
+<hr>
+<table>
+    <thead>
+        <tr><h3>Registered Fork-lifts</h3></tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Model</th>
+            <th scope="col">Plate Number</th>
+            <th scope="col">Operation Start</th>
+            <th scope="col">Current Job</th>
+            <th scope="col">Current Driver</th>  
+        </tr>
+    </thead>
+    <tbody>
+        <% count1=0 %>
+        <%machine.forEach(function(machine){ %>
+            <% if(machine.isFork){ %>
+                <% count1 = count1+1 %>
+                <tr>
+                    <th scope="col"><%=count1%></th>
+                    <th scope="col"><%=machine.manufacturer%></th>
+                    <th scope="col"><%=machine.model%></th>
+                    <th scope="col"><%=machine.plate%></th>
+                    <% var d = machine.operationStart; 
+                    date = d.toISOString().toString();
+                    var formattedDate = date.substring(0, date.lastIndexOf(".")); %>
+                    <th scope="col"><%=formattedDate%></th>
+                    <th scope="col"><%=machine.currentJob%></th></th>
+                    <th scope="col"><%=machine.currentDriver%></th>
+                </tr>
+           <% } %>
+       <% }) %>
+    </tbody>
+</table>
+
+
+
+<% include ../partials/footer %>

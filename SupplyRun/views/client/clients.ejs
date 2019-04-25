@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+<h1>Clients Management</h1>
+<table>
+    <thead>
+        <tr>
+            <th scope='col'> #</th>
+            <th scope='col'>Full Name</th>
+            <th scope='col'>Company</th>
+            <th scope='col'>Account Management</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% count = 0 %>
+    <% client.forEach(function(client) { %>
+        <% if(client.isClient){ %>
+        <% count = count+1 %>
+        <tr>
+            <th scope="row"><%=count%></th>
+            <td><%= client.firstname+" "+client.lastname %></td>
+            <td><%=client.companyName%></td>
+            <td><a href='/providers/<%=client._id%>/manage'>Manage</a></td>
+        </tr>
+        <% }}) %>
+    </tbody>
+</table>
+<hr>
+<a type="button" class="btn btn-secondary btn-sm" href="/newProvider">Add New Client</a>
+
+<% include ../partials/footer %>

@@ -1,0 +1,86 @@
+<!DOCtype html>
+<html>
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet"  href="/stylesheet/style.css">
+        <body>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+              <a class="navbar-brand" href="#">Supply Run</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <% if(!currentUser){ %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                  </li>
+                   <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                  </li>
+                 <% } else { 
+                   if(currentUser.isAdmin){ %>
+                   <!--Employee Dropdown-->
+                   <div class="dropdown show nav-item">
+                      <a class="btn btn-secondary dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                        Employees
+                      </a>
+                      <div class="dropdown-menu nav-item" aria-labelledby="dropdownMenuLink">
+                         <li>
+                            <a class="dropdown-item" href='/employees'>Employees List</a>
+                         </li>
+                         <li>
+                            <a class="dropdown-item" href='/newemployee'>Employees Registration</a>
+                         </li>
+                      </div>
+                    </div>
+                    
+                    <div class="dropdown show nav-item">
+                      <a class="btn btn-secondary dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                        Clients
+                      </a>
+                      <div class="dropdown-menu nav-item" aria-labelledby="dropdownMenuLink">
+                         <li>
+                            <a class="dropdown-item" href='/clients'>Clients List</a>
+                         </li>
+                         <li>
+                            <a class="dropdown-item" href='/newclient'>Clients Registration</a>
+                         </li>
+                      </div>
+                    </div>
+                    
+                    
+                   
+                    <% } %>
+                    <% if(currentUser.accountType ==3) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/jobs">Jobs</a>
+                        </li> 
+                    <% } %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Signed In As <%= currentUser.username %> </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  <% } %>
+                </ul>
+              </div>
+            </nav>
+<div class="card">
+     <% if(error && error.length > 0){ %>
+     <div class="alert alert-danger" role="alert">
+         <%= error %>
+     </div>
+     <% } %>
+      <% if(success && success.length > 0){ %>
+     <div class="alert alert-success" role="alert">
+         <%= success %>
+     </div>
+     <% } %>
+ </div>
+<div class="card">
+            
