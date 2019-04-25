@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from 'react-redux'
 import axios from '../../axios'
+import * as actionTypes from '../../store/actions'
 
 import classes from './List.module.css'
 import {Button,ListGroup} from 'reactstrap'
@@ -100,15 +101,15 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = dispatch=>{
     return{
-        toggleInputHandler:()=>dispatch({type:'TOGGLE_INPUT_HANDLER'}),
-        changedName:(event)=>dispatch({type:'CHANGED_NAME', payload:event.target.value}),
-        changedDesc:(event)=>dispatch({type:'CHANGED_DESC',payload:event.target.value}),
-        addItem:()=>{return(dispatch({type:'ADD_ITEM'}))},
-        deleteItem:(index)=>dispatch({type:'DELETE_ITEM',index:index}),
-        editItemHandler:(index)=>dispatch({type:'EDIT_ITEM_HANDLER',index:index}),
-        editItem:()=>dispatch({type:'EDIT_ITEM'}),
-        itemIndexChanger:(index)=>dispatch({type:'CHANGE_ITEM_INDEX',index:index}),
-        initialState:(value)=>dispatch({type:'SET_STATE',payload:value})
+        toggleInputHandler:()=>dispatch({type:actionTypes.TOGGLE_INPUT_HANDLER}),
+        changedName:(event)=>dispatch({type:actionTypes.CHANGED_NAME, payload:event.target.value}),
+        changedDesc:(event)=>dispatch({type:actionTypes.CHANGED_DESC,payload:event.target.value}),
+        addItem:()=>{return(dispatch({type:actionTypes.ADD_ITEM}))},
+        deleteItem:(index)=>dispatch({type:actionTypes.DELETE_ITEM,index:index}),
+        editItemHandler:(index)=>dispatch({type:actionTypes.EDIT_ITEM_HANDLER,index:index}),
+        editItem:()=>dispatch({type:actionTypes.EDIT_ITEM}),
+        itemIndexChanger:(index)=>dispatch({type:actionTypes.CHANGE_ITEM_INDEX,index:index}),
+        initialState:(value)=>dispatch({type:actionTypes.SET_STATE,payload:value})
     };
 }
 
