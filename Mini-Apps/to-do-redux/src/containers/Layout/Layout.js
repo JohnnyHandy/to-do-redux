@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Container, Card, CardGroup} from 'reactstrap'
-import {connect} from 'react-redux'
 
 
 import Sidebar from './Sidebar/Sidebar'
@@ -19,9 +18,7 @@ class Layout extends Component{
                     </Card>
                     <Card>
                         <Info
-                        className={classes.Info}
-                        itemData={this.props.items}
-                        itemIndex={this.props.itemIndex}/>
+                        className={classes.Info}/>
                     </Card>
                 </CardGroup>
             </Container>
@@ -29,11 +26,4 @@ class Layout extends Component{
     } 
 }
 
-const mapStateToProps = state =>{
-    return{
-        items:state.items,
-        itemIndex:state.itemIndex
-    }
-}
-
-export default connect(mapStateToProps)(Layout)
+export default Layout

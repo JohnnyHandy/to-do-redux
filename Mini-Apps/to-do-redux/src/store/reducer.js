@@ -1,4 +1,3 @@
-
 const initialState ={
     items:[],
     newItem:{},
@@ -49,7 +48,7 @@ const reducer = (state=initialState,action)=>{
                     itemName:state.newItem.itemName,
                     itemDesc:state.newItem.itemDesc,
                     created:new Date().toISOString().slice(0,10),
-                    lastEdited:undefined
+                    lastEdited:undefined,
                 }
             ],
             newItem:{},
@@ -60,6 +59,7 @@ const reducer = (state=initialState,action)=>{
             descInput:'',
             buttonText:''
         }
+        
     }
     if(action.type==='DELETE_ITEM'){
         let newIndex = action.index

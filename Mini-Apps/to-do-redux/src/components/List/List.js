@@ -11,15 +11,19 @@ import Items from './Items/Items'
 
 class List extends Component{
 
-    componentDidMount() {
-        axios.get('https://to-do-list-299ec.firebaseio.com/list/items.json')
+    componentWillMount() {
+        axios.get('/list/items.json')
         .then(response=>{
            console.log("response.data")
            console.log(response.data)
-           this.props.initialState()
+           this.props.initialState(response.data)
         }).catch(error=>console.log(error))
       }
-
+    componentDidUpdate(prevProps,prevState){
+        if(prevProps.items !== this.props.items)
+        {axios.put('/list/items.json',this.props.items)
+        .then(response=>console.log(response)).catch(error=>console.log(error.message))}
+    }
     render(){
         let inputElement = null
          if(this.props.input){
@@ -86,11 +90,11 @@ class List extends Component{
     }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = (state) =>{
     return{
         items:state.items,
         input:state.input,
-        state:state
+        state:state,
     }
 }
 
@@ -99,7 +103,7 @@ const mapDispatchToProps = dispatch=>{
         toggleInputHandler:()=>dispatch({type:'TOGGLE_INPUT_HANDLER'}),
         changedName:(event)=>dispatch({type:'CHANGED_NAME', payload:event.target.value}),
         changedDesc:(event)=>dispatch({type:'CHANGED_DESC',payload:event.target.value}),
-        addItem:()=>dispatch({type:'ADD_ITEM'}),
+        addItem:()=>{return(dispatch({type:'ADD_ITEM'}))},
         deleteItem:(index)=>dispatch({type:'DELETE_ITEM',index:index}),
         editItemHandler:(index)=>dispatch({type:'EDIT_ITEM_HANDLER',index:index}),
         editItem:()=>dispatch({type:'EDIT_ITEM'}),
@@ -107,5 +111,16 @@ const mapDispatchToProps = dispatch=>{
         initialState:(value)=>dispatch({type:'SET_STATE',payload:value})
     };
 }
+
+// const mergeProps = (stateProps,disPatchProps,ownProps)=>{
+//     const addItem =()=>{
+//         disPatchProps.addItem(stateProps.items)
+//     }
+//     return({
+//         ...stateProps,
+//         ...disPatchProps,
+//         addItem
+//     })
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)

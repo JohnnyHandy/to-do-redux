@@ -3,12 +3,13 @@ import React from 'react'
 import Details from './Details/Details'
 import {Card} from 'reactstrap'
 import classes from './Info.module.css'
+import {connect} from 'react-redux'
 
 const Info = (props)=>{
     let itemDetails = 'Item Details'
-    if(props.itemData.length !== 0){
+    if(props.items.length !== 0 && props.items !== undefined){
         itemDetails=(
-            props.itemData.map((i,index)=>{
+            props.items.map((i,index)=>{
                 if(i.id===props.itemIndex){
                     return <Details
                             title={i.itemName}
@@ -40,4 +41,11 @@ const Info = (props)=>{
     )
 }
 
-export default Info
+const mapStateToProps = state =>{
+    return{
+        items:state.items,
+        itemIndex:state.itemIndex
+    }
+}
+
+export default connect(mapStateToProps)(Info)
