@@ -1,0 +1,8 @@
+.info{
+    width:60%;
+    height:80%;
+    box-sizing:border-box;
+    float:right;
+    text-align:center;
+    border:2px solid white;
+}

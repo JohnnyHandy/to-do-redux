@@ -1,0 +1,15 @@
+.Layout{
+    width:600px;
+    height:800px;
+    box-sizing:border-box;
+    border:5px solid lightblue;
+    background-color:lightgray;
+    align-content:center;
+    text-align:center;
+}
+
+.title{
+    box-sizing:border-box;
+    border:2px solid white;
+    font-family: 'Lato', sans-serif;
+}

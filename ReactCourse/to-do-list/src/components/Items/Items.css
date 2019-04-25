@@ -1,0 +1,10 @@
+.Items{
+    box-sizing: border-box;
+    border: 1px solid white;
+    margin: auto 2px;
+}
+
+.deleteButton{
+    display:inline-block;
+    margin-left: 5px;
+}
