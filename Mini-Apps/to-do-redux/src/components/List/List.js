@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from 'react-redux'
 import axios from '../../axios'
-import * as actionTypes from '../../store/actions'
+import * as actionCreators from '../../store/actions/index'
 
 import classes from './List.module.css'
 import {Button,ListGroup} from 'reactstrap'
@@ -20,11 +20,7 @@ class List extends Component{
            this.props.initialState(response.data)
         }).catch(error=>console.log(error))
       }
-    componentDidUpdate(prevProps,prevState){
-        if(prevProps.items !== this.props.items)
-        {axios.put('/list/items.json',this.props.items)
-        .then(response=>console.log(response)).catch(error=>console.log(error.message))}
-    }
+
     render(){
         let inputElement = null
          if(this.props.input){
@@ -101,15 +97,15 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = dispatch=>{
     return{
-        toggleInputHandler:()=>dispatch({type:actionTypes.TOGGLE_INPUT_HANDLER}),
-        changedName:(event)=>dispatch({type:actionTypes.CHANGED_NAME, payload:event.target.value}),
-        changedDesc:(event)=>dispatch({type:actionTypes.CHANGED_DESC,payload:event.target.value}),
-        addItem:()=>{return(dispatch({type:actionTypes.ADD_ITEM}))},
-        deleteItem:(index)=>dispatch({type:actionTypes.DELETE_ITEM,index:index}),
-        editItemHandler:(index)=>dispatch({type:actionTypes.EDIT_ITEM_HANDLER,index:index}),
-        editItem:()=>dispatch({type:actionTypes.EDIT_ITEM}),
-        itemIndexChanger:(index)=>dispatch({type:actionTypes.CHANGE_ITEM_INDEX,index:index}),
-        initialState:(value)=>dispatch({type:actionTypes.SET_STATE,payload:value})
+        toggleInputHandler:()=>dispatch(actionCreators.toggleInput()),
+        changedName:(event)=>dispatch(actionCreators.changedName(event)),
+        changedDesc:(event)=>dispatch(actionCreators.changedDesc(event)),
+        addItem:()=>dispatch(actionCreators.addItem()),
+        deleteItem:(index)=>dispatch(actionCreators.deleteItem(index)),
+        editItemHandler:(index)=>dispatch(actionCreators.editItemHandler(index)),
+        editItem:()=>dispatch(actionCreators.editItem()),
+        itemIndexChanger:(index)=>dispatch(actionCreators.itemIndexChanger(index)),
+        initialState:(value)=>dispatch(actionCreators.initialState(value))
     };
 }
 

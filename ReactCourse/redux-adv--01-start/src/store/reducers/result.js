@@ -8,7 +8,6 @@ const initialState = {
 const deleteResult=(state,action)=>{
     const updatedArray = state.results.filter(result => result.id !== action.resultElId);
     return updateObject(state,{results:updatedArray})
-
 }
 
 const reducer = ( state = initialState, action ) => {
