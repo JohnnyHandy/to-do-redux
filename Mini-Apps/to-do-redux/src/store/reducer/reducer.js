@@ -1,5 +1,6 @@
 /* eslint-disable default-case */
 import * as actionTypes from '../actions/actionTypes'
+import {updateObject} from './utility'
 const initialState ={
     items:[],
     newItem:{},
@@ -15,42 +16,56 @@ const initialState ={
 const reducer = (state=initialState,action)=>{
     switch(action.type){
         case actionTypes.SET_STATE:
-            return{
-                ...state,
-                items:action.payload
-            }
+            return updateObject(state,{items:action.payload})
+            // return{
+            //     ...state,
+            //     items:action.payload
+            // }
         case actionTypes.CHANGED_NAME:
-            return({
-                ...state,
-                newItem:{
-                    ...state.newItem,
-                    itemName:action.payload
-                },
+            const updateName = {itemName:action.payload}
+            const updatedName = updateObject(state.newItem,updateName)
+            const updateState = {
+                newItem:updatedName,
                 nameInput:action.payload
-            })
+            }
+            return updateObject(state,updateState)
+            // return({
+            //     ...state,
+            //     newItem:{
+            //         ...state.newItem,
+            //         itemName:action.payload
+            //     },
+            //     nameInput:action.payload
+            // })
         case actionTypes.CHANGED_DESC:
-            return({
-                ...state,
-                newItem:{
-                    ...state.newItem,
-                    itemDesc:action.payload
-                },
+            const updateDesc = {itemDesc:action.payload};
+            const updatedDesc = updateObject(state.newItem,updateDesc)
+            const updateState2={
+                newItem:updatedDesc,
                 descInput:action.payload
-            })
+            }
+            return updateObject(state,updateState2)
+            // return({
+            //     ...state,
+            //     newItem:{
+            //         ...state.newItem,
+            //         itemDesc:action.payload
+            //     },
+            //     descInput:action.payload
+            // })
         case actionTypes.ADD_ITEM:
             let newId = state.items.length
-            return{
-                ...state,
-                items:[
-                    ...state.items,
-                    {
-                        id:newId,
-                        itemName:state.newItem.itemName,
-                        itemDesc:state.newItem.itemDesc,
-                        created:new Date().toISOString().slice(0,10),
-                        lastEdited:undefined,
-                    }
-                ],
+            const updateItem = {
+                id:newId,
+                itemName:state.newItem.itemName,
+                itemDesc:state.newItem.itemDesc,
+                created:new Date().toISOString().slice(0,10),
+                lastEdited:undefined,
+            }
+            const updatedItem = updateObject(state.items,updateItem)
+            const updatedItems = state.items.concat(updatedItem)
+            const updatedState = {
+                items:updatedItems,
                 newItem:{},
                 input:false,
                 edit:false,
@@ -59,6 +74,27 @@ const reducer = (state=initialState,action)=>{
                 descInput:'',
                 buttonText:''
             }
+            return updateObject(state,updatedState)
+            // return{
+            //     ...state,
+            //     items:[
+            //         ...state.items,
+            //         {
+            //             id:newId,
+            //             itemName:state.newItem.itemName,
+            //             itemDesc:state.newItem.itemDesc,
+            //             created:new Date().toISOString().slice(0,10),
+            //             lastEdited:undefined,
+            //         }
+            //     ],
+            //     newItem:{},
+            //     input:false,
+            //     edit:false,
+            //     itemIndex:newId,
+            //     nameInput:'',
+            //     descInput:'',
+            //     buttonText:''
+            // }
         case actionTypes.DELETE_ITEM:
             let newIndex = action.index
             if(action.index > 0){
@@ -90,20 +126,35 @@ const reducer = (state=initialState,action)=>{
                 }
                 return null
             })
-            return{
-                ...state,
+            const editItem = {
+                itemName:itemName,
+                itemDesc:itemDesc
+            }
+            const editedItem = updateObject(state.newItem,editItem)
+            const updatedState3 = {
                 nameInput:itemName,
                 descInput:itemDesc,
-                newItem:{
-                    ...state.newItem,
-                    itemName:itemName,
-                    itemDesc:itemDesc
-                },
+                newItem:editedItem,
                 edit:edit,
                 input:false,
                 buttonText:'Edit Item',
                 editIndex:action.index
             }
+            return updateObject(state,updatedState3)
+            // return{
+            //     ...state,
+            //     nameInput:itemName,
+            //     descInput:itemDesc,
+            //     newItem:{
+            //         ...state.newItem,
+            //         itemName:itemName,
+            //         itemDesc:itemDesc
+            //     },
+            //     edit:edit,
+            //     input:false,
+            //     buttonText:'Edit Item',
+            //     editIndex:action.index
+            // }
         case actionTypes.EDIT_ITEM:
             return{
                 ...state.items,
@@ -127,28 +178,31 @@ const reducer = (state=initialState,action)=>{
                 input:false
             }
         case actionTypes.CHANGE_ITEM_INDEX:
-            return{
-                ...state,
-                itemIndex:action.index
-            }
+            return updateObject(state,{itemIndex:action.index})
+            // return{
+            //     ...state,
+            //     itemIndex:action.index
+            // }
         case actionTypes.INDEX_DOWN:
             let newIndexDown = state.itemIndex
             if(newIndexDown > 0){
                 newIndexDown = newIndexDown-1
             }
-            return{
-                ...state,
-                itemIndex:newIndexDown
-            }
+            return updateObject(state,{itemIndex:newIndexDown})
+            // return{
+            //     ...state,
+            //     itemIndex:newIndexDown
+            // }
         case actionTypes.INDEX_UP:
             let newIndexUp = state.itemIndex
             if(newIndexUp < state.items.length-1){
                 newIndexUp=newIndexUp+1
             }
-            return{
-                ...state,
-                itemIndex:newIndexUp
-            }
+            return updateObject(state,{itemIndex:newIndexUp})
+            // return{
+            //     ...state,
+            //     itemIndex:newIndexUp
+            // }
         case actionTypes.TOGGLE_INPUT_HANDLER:
             let input = undefined
             let buttonText = ''
@@ -159,11 +213,15 @@ const reducer = (state=initialState,action)=>{
                 input = true
                 buttonText = 'Add Item'
             }
-            return{
-                ...state,
+            return updateObject(state,{
                 input:input,
                 buttonText:buttonText
-            }
+            })
+            // return{
+            //     ...state,
+            //     input:input,
+            //     buttonText:buttonText
+            // }
     }
     return state
 }

@@ -17,7 +17,10 @@ class List extends Component{
         .then(response=>{
            console.log("response.data")
            console.log(response.data)
-           this.props.initialState(response.data)
+           if(response.data){
+            this.props.initialState(response.data)
+           }
+           
         }).catch(error=>console.log(error))
       }
 
