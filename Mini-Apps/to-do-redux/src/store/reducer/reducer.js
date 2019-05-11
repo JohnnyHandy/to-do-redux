@@ -10,7 +10,8 @@ const initialState ={
     editIndex:undefined,
     nameInput:'',
     descInput:'',
-    buttonText:''
+    buttonText:'',
+    activeTab:undefined
 }
 
 const setState = (state,action)=>{
@@ -173,6 +174,10 @@ const toggleInputHandler = (state,action)=>{
         buttonText:buttonText
     })
 }
+
+const setActiveTab =(state,action)=>{
+     return updateObject(state,{activeTab:action.payload})
+}
 const reducer = (state=initialState,action)=>{
     switch(action.type){
         case actionTypes.SET_STATE:return setState(state,action);
@@ -186,6 +191,7 @@ const reducer = (state=initialState,action)=>{
         case actionTypes.INDEX_DOWN:return indexDown(state,action);
         case actionTypes.INDEX_UP:return indexUp(state,action);
         case actionTypes.TOGGLE_INPUT_HANDLER:return toggleInputHandler(state,action);
+        case actionTypes.SET_ACTIVE_TAB:return setActiveTab(state,action);
         default: return state
     }
 }

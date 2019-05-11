@@ -60,3 +60,10 @@ export const initialState = (value)=>{
         payload:value
     }
 }
+
+export const setActiveTab = (index)=>{
+    return{
+        type:actionTypes.SET_ACTIVE_TAB,
+        payload:index
+    }
+}

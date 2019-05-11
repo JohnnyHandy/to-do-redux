@@ -10,5 +10,6 @@ export {
     editItem,
     deleteItem,
     itemIndexChanger,
-    initialState
+    initialState,
+    setActiveTab
 } from './listControl'
