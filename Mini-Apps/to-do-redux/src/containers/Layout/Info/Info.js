@@ -7,9 +7,17 @@ import {connect} from 'react-redux'
 
 const Info = (props)=>{
     let itemDetails = 'Item Details'
-    if(props.items.length !== 0 && props.items !== undefined){
+    let items = undefined
+    if(props.activeTab === '1'){
+        items = props.shortTerm
+    } else if (props.activeTab ==='2'){
+        items = props.mediumTerm
+    } else if (props.activeTab ==='3'){
+        items = props.longTerm
+    }
+    if(items.length !== 0 && items !== undefined){
         itemDetails=(
-            props.items.map((i,index)=>{
+            items.map((i,index)=>{
                 if(i.id===props.itemIndex){
                     return <Details
                             title={i.itemName}
@@ -44,7 +52,10 @@ const Info = (props)=>{
 const mapStateToProps = state =>{
     return{
         items:state.items,
-        itemIndex:state.itemIndex
+        shortTerm:state.items.shortTerm,
+        mediumTerm:state.items.mediumTerm,
+        longTerm:state.items.longTerm,
+        activeTab:state.activeTab
     }
 }
 

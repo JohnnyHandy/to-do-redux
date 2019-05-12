@@ -2,7 +2,11 @@
 import * as actionTypes from '../actions/actionTypes'
 import {updateObject} from './utility'
 const initialState ={
-    items:[],
+    items:{
+        shortTerm:[],
+        mediumTerm:[],
+        longTerm:[]
+    },
     newItem:{},
     input:undefined,
     itemIndex:0,
@@ -11,7 +15,7 @@ const initialState ={
     nameInput:'',
     descInput:'',
     buttonText:'',
-    activeTab:undefined
+    activeTab:'1'
 }
 
 const setState = (state,action)=>{

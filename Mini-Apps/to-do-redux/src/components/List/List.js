@@ -12,17 +12,17 @@ import Items from './Items/Items'
 
 class List extends Component{
 
-    componentWillMount() {
-        axios.get('/list/items.json')
-        .then(response=>{
-           console.log("response.data")
-           console.log(response.data)
-           if(response.data){
-            this.props.initialState(response.data)
-           }
+    // componentWillMount() {
+    //     axios.get('/list/items.json')
+    //     .then(response=>{
+    //        console.log("response.data")
+    //        console.log(response.data)
+    //        if(response.data){
+    //         this.props.initialState(response.data)
+    //        }
            
-        }).catch(error=>console.log(error))
-      }
+    //     }).catch(error=>console.log(error))
+    //   }
 
     render(){
         let inputElement = null
@@ -52,9 +52,16 @@ class List extends Component{
          }
 
          let itemElement = null
-
-         if(this.props.items && this.props.items.length !== 0 ){
-             itemElement = this.props.items.map((i,index)=>{
+         let items = undefined
+         if(this.props.state.activeTab === '1'){
+             items = this.props.shortTerm
+         } else if (this.props.state.activeTab ==='2'){
+             items = this.props.mediumTerm
+         } else if (this.props.activeTab ==='3'){
+             items = this.props.longTerm
+         }
+         if(items && items.length !== 0 ){
+             itemElement = items.map((i,index)=>{
                  return <Items
                         className={classes.items}
                         id={index}
@@ -92,7 +99,9 @@ class List extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-        items:state.items,
+        shortTerm:state.items.shortTerm,
+        mediumTerm:state.items.mediumTerm,
+        longTerm:state.items.longTerm,
         input:state.input,
         state:state,
     }
