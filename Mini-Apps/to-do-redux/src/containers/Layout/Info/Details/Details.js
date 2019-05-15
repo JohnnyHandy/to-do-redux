@@ -10,10 +10,17 @@ const Details = (props)=>{
     if(props.edited !== undefined){
         edited="Last edited on "+props.edited
     }
-
+    let items = undefined
+    if(props.activeTab === '1'){
+        items = props.shortTerm
+    } else if (props.activeTab ==='2'){
+        items = props.mediumTerm
+    } else if (props.activeTab ==='3'){
+        items = props.longTerm
+    }
     let disableLeftArrow = false
     let disableRightArrow = false
-    if(props.itemIndex === props.items.length-1 || props.items.length ===0){
+    if(props.itemIndex === items.length-1 || items.length ===0){
         disableRightArrow = true
     }
     if(props.itemIndex === 0){
@@ -58,7 +65,11 @@ const Details = (props)=>{
 const mapStateToProps = state =>{
     return{
         itemIndex:state.itemIndex,
-        items:state.items
+        shortTerm:state.items.shortTerm,
+        mediumTerm:state.items.mediumTerm,
+        longTerm:state.items.longTerm,
+        activeTab:state.activeTab
+        // items:state.items
     }
 }
 

@@ -15,7 +15,7 @@ const Info = (props)=>{
     } else if (props.activeTab ==='3'){
         items = props.longTerm
     }
-    if(items.length !== 0 && items !== undefined){
+    if(items.length !== 0){
         itemDetails=(
             items.map((i,index)=>{
                 if(i.id===props.itemIndex){
@@ -26,11 +26,12 @@ const Info = (props)=>{
                             edited={i.lastEdited}
                             key={index}/> 
                 }
+                console.log(itemDetails)
             return null
             })
         )
     } else{
-         itemDetails = (
+         return itemDetails = (
                         <Details 
                         title="Title"
                         desc="Description"
@@ -40,12 +41,9 @@ const Info = (props)=>{
     }
 
     return(
-        
             <Card className={classes.info}>
                 {itemDetails}
             </Card>
-        
-        
     )
 }
 
@@ -54,7 +52,8 @@ const mapStateToProps = state =>{
         shortTerm:state.items.shortTerm,
         mediumTerm:state.items.mediumTerm,
         longTerm:state.items.longTerm,
-        activeTab:state.activeTab
+        activeTab:state.activeTab,
+        itemIndex: state.itemIndex
     }
 }
 

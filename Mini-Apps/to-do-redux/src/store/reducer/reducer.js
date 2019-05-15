@@ -63,8 +63,10 @@ const addItem = (state,action)=>{
         lastEdited:undefined,
     }
   
-    const updatedObject = updateObject(items,updateItem)
-    const updatedArray = items.concat(updatedObject)
+    // const updatedObject = updateObject(items,updateItem)
+    // console.log(updatedObject)
+    const updatedArray = items.concat(updateItem)
+    console.log(updatedArray)
     let updatedContent = undefined
     if(state.activeTab==='1'){
         updatedContent = updateObject(items,{shortTerm:updatedArray})
@@ -73,8 +75,10 @@ const addItem = (state,action)=>{
     } else if(state.activeTab==='3'){
         updatedContent = updateObject(items,{longTerm:updatedArray})
     }
+    console.log(updatedContent)
+    const updatedItems = updateObject(state.items,updatedContent)
     const updatedState = {
-        items:updatedContent,
+        items:updatedItems,
         newItem:{},
         input:false,
         edit:false,
@@ -83,25 +87,48 @@ const addItem = (state,action)=>{
         descInput:'',
         buttonText:''
     }
-    console.log(state)
     return updateObject(state,updatedState)
 }
 
 const deleteItem = (state,action)=>{
+    let items = undefined
+    if(state.activeTab==='1'){
+        items = state.items.shortTerm 
+    } else if(state.activeTab==='2'){
+        items = state.items.mediumTerm
+    } else if(state.activeTab==='3'){
+        items = state.items.longTerm
+    }
     let newIndex = action.index
     if(action.index > 0){
         newIndex = action.index-1
     } else {
         newIndex = 0
     }
-    return{
-        ...state,
-        items:[
-            ...state.items.slice(0,action.index),
-            ...state.items.slice(action.index+1)
-        ].map((item, index) => ( updateObject(item,{id:index}))),
-        itemIndex:newIndex
+   
+    const deleteItems = [ 
+        ...items.slice(0,action.index),
+        ...items.slice(action.index+1)
+    ].map((item, index) => ( updateObject(item,{id:index})))
+    let updatedContent = undefined
+    if(state.activeTab==='1'){
+        updatedContent = updateObject(state.items,{shortTerm:deleteItems})
+    } else if(state.activeTab==='2'){
+        updatedContent = updateObject(state.items,{mediumTerm:deleteItems})
+    } else if(state.activeTab==='3'){
+        updatedContent = updateObject(state.items,{longTerm:deleteItems})
     }
+    // const updateItems = updateObject(state.items,updatedContent)
+    return updateObject(state,{items:updatedContent,itemIndex:newIndex})
+
+    // return{
+    //     ...state,
+    //     items:[
+    //         ...state.items.slice(0,action.index),
+    //         ...state.items.slice(action.index+1)
+    //     ].map((item, index) => ( updateObject(item,{id:index}))),
+    //     itemIndex:newIndex
+    // }
 
 }
 
@@ -114,7 +141,15 @@ const editItemHandler = (state,action)=>{
     } else{
         edit=true
     }
-    state.items.map((item,index)=>{
+    let items = undefined
+    if(state.activeTab==='1'){
+        items = state.items.shortTerm 
+    } else if(state.activeTab==='2'){
+        items = state.items.mediumTerm
+    } else if(state.activeTab==='3'){
+        items = state.items.longTerm
+    }
+    items.map((item,index)=>{
         if(index === action.index){
             itemName=item.itemName
             itemDesc=item.itemDesc
@@ -139,21 +174,39 @@ const editItemHandler = (state,action)=>{
 }
 const editItem =(state,action)=>{
     let newIndex = undefined
-    return{
-        ...state.items,
-        items:[...state.items].map((item,index)=>{
-            if(index===state.editIndex){
-                newIndex = index
-                return ({
-                    ...item,
-                    itemName:state.newItem.itemName,
-                    itemDesc:state.newItem.itemDesc,
-                    lastEdited:new Date().toISOString().slice(0,10)
-                })
-            } else{
-                return ({...item})
-            }
-        }),
+    let items = undefined
+    if(state.activeTab==='1'){
+        items = state.items.shortTerm 
+    } else if(state.activeTab==='2'){
+        items = state.items.mediumTerm
+    } else if(state.activeTab==='3'){
+        items = state.items.longTerm
+    }
+    
+    const editedItem = [...items].map((item,index)=>{
+        if(index===state.editIndex){
+            newIndex = index
+            return updateObject(item,{
+                itemName:state.newItem.itemName,
+                itemDesc:state.newItem.itemDesc,
+                lastEdited:new Date().toISOString().slice(0,10)
+            })
+        } else {
+            return updateObject(item)
+        }
+    })
+    console.log(editedItem)
+    let updatedContent = undefined
+    if(state.activeTab==='1'){
+        updatedContent = updateObject(state.items,{shortTerm:editedItem})
+    } else if(state.activeTab==='2'){
+        updatedContent = updateObject(state.items,{mediumTerm:editedItem})
+    } else if(state.activeTab==='3'){
+        updatedContent = updateObject(state.items,{longTerm:editedItem})
+    }
+
+    return updateObject(state,{
+        items:updatedContent,
         edit:false,
         nameInput:'',
         descInput:'',
@@ -161,7 +214,31 @@ const editItem =(state,action)=>{
         newItem:{},
         input:false,
         itemIndex:newIndex
-    }
+    })
+    // const editedObject = updateObject()
+    // return{
+    //     ...state.items,
+    //     items:[...state.items].map((item,index)=>{
+    //         if(index===state.editIndex){
+    //             newIndex = index
+    //             return ({
+    //                 ...item,
+    //                 itemName:state.newItem.itemName,
+    //                 itemDesc:state.newItem.itemDesc,
+    //                 lastEdited:new Date().toISOString().slice(0,10)
+    //             })
+    //         } else{
+    //             return ({...item})
+    //         }
+    //     }),
+        // edit:false,
+        // nameInput:'',
+        // descInput:'',
+        // editIndex:undefined,
+        // newItem:{},
+        // input:false,
+        // itemIndex:newIndex
+    // }
 }
 
 const changeItemIndex =(state,action)=>{
