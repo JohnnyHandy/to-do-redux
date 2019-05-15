@@ -51,7 +51,6 @@ const Info = (props)=>{
 
 const mapStateToProps = state =>{
     return{
-        items:state.items,
         shortTerm:state.items.shortTerm,
         mediumTerm:state.items.mediumTerm,
         longTerm:state.items.longTerm,

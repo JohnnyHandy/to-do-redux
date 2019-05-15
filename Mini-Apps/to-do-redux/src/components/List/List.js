@@ -52,10 +52,10 @@ class List extends Component{
          }
 
          let itemElement = null
-         let items = undefined
-         if(this.props.state.activeTab === '1'){
+         let items = null
+         if(this.props.activeTab === '1' & this.props.shortTerm!==undefined){
              items = this.props.shortTerm
-         } else if (this.props.state.activeTab ==='2'){
+         } else if (this.props.activeTab ==='2'){
              items = this.props.mediumTerm
          } else if (this.props.activeTab ==='3'){
              items = this.props.longTerm
@@ -104,6 +104,7 @@ const mapStateToProps = (state) =>{
         longTerm:state.items.longTerm,
         input:state.input,
         state:state,
+        activeTab:state.activeTab
     }
 }
 

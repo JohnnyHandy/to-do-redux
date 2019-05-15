@@ -42,7 +42,19 @@ const changedDesc = (state,action)=>{
 }
 
 const addItem = (state,action)=>{
-    let newId = state.items.length
+    let items = undefined
+    let newId=undefined;
+        if(state.activeTab==='1'){
+            newId = state.items.shortTerm.length
+            items = state.items.shortTerm 
+        } else if(state.activeTab==='2'){
+            newId = state.items.mediumTerm.length
+            items = state.items.mediumTerm
+        } else if(state.activeTab==='3'){
+            newId = state.items.longTerm.length
+            items = state.items.longTerm
+        }
+    
     const updateItem = {
         id:newId,
         itemName:state.newItem.itemName,
@@ -50,10 +62,19 @@ const addItem = (state,action)=>{
         created:new Date().toISOString().slice(0,10),
         lastEdited:undefined,
     }
-    const updatedItem = updateObject(state.items,updateItem)
-    const updatedItems = state.items.concat(updatedItem)
+  
+    const updatedObject = updateObject(items,updateItem)
+    const updatedArray = items.concat(updatedObject)
+    let updatedContent = undefined
+    if(state.activeTab==='1'){
+        updatedContent = updateObject(items,{shortTerm:updatedArray})
+    } else if(state.activeTab==='2'){
+        updatedContent = updateObject(items,{mediumTerm:updatedArray})
+    } else if(state.activeTab==='3'){
+        updatedContent = updateObject(items,{longTerm:updatedArray})
+    }
     const updatedState = {
-        items:updatedItems,
+        items:updatedContent,
         newItem:{},
         input:false,
         edit:false,
@@ -62,6 +83,7 @@ const addItem = (state,action)=>{
         descInput:'',
         buttonText:''
     }
+    console.log(state)
     return updateObject(state,updatedState)
 }
 

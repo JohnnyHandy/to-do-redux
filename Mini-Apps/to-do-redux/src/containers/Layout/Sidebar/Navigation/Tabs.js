@@ -48,13 +48,13 @@ class Tabs extends Component{
                     </Nav>
                     <TabContent activeTab = {this.props.tabId} >
                         <TabPane tabId='1'>
-                            Content 1
+                            Short Term
                         </TabPane>
                         <TabPane tabId='2'>
-                            Content 2
+                            Medium Term
                         </TabPane>
                         <TabPane tabId='3'>
-                            Content 3
+                            Long Term
                         </TabPane>
                     </TabContent>
                 </React.Fragment>
