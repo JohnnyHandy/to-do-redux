@@ -66,7 +66,6 @@ const addItem = (state,action)=>{
     // const updatedObject = updateObject(items,updateItem)
     // console.log(updatedObject)
     const updatedArray = items.concat(updateItem)
-    console.log(updatedArray)
     let updatedContent = undefined
     if(state.activeTab==='1'){
         updatedContent = updateObject(items,{shortTerm:updatedArray})
@@ -75,7 +74,6 @@ const addItem = (state,action)=>{
     } else if(state.activeTab==='3'){
         updatedContent = updateObject(items,{longTerm:updatedArray})
     }
-    console.log(updatedContent)
     const updatedItems = updateObject(state.items,updatedContent)
     const updatedState = {
         items:updatedItems,
@@ -195,7 +193,6 @@ const editItem =(state,action)=>{
             return updateObject(item)
         }
     })
-    console.log(editedItem)
     let updatedContent = undefined
     if(state.activeTab==='1'){
         updatedContent = updateObject(state.items,{shortTerm:editedItem})
