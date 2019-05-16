@@ -12,12 +12,12 @@ class Layout extends Component{
         return(
             <Container className={classes.Layout}>
                 <h1>To-Do-List</h1>
-                <CardGroup className={classes.sidebar}>
-                    <Card className={classes.sidebar}>
-                        <Sidebar className={classes.sidebar}/>
+                <CardGroup>
+                    <Card >
+                        <Sidebar />
                     </Card>
-                    <Card className={classes.borders}>
-                        <Info className={classes.borders}/>
+                    <Card >
+                        <Info/>
                     </Card>
                 </CardGroup>
             </Container>
