@@ -50,20 +50,52 @@ class List extends Component{
                 buttonText={this.props.state.buttonText}/>
              )
          }
-
+        //  const backgroundColors=['#2b3252','#ef5455','#fad744']
+        //  const fontColors = ['#fad744','#2b3252','#ef5455']
          let itemElement = null
          let items = null
-         if(this.props.activeTab === '1' & this.props.shortTerm!==undefined){
+         let buttonElement = null
+         let backgroundStyle = classes.shortBack
+         if(this.props.activeTab === '1'){
              items = this.props.shortTerm
+             backgroundStyle = classes.shortBack
+             buttonElement =(
+                <Button 
+                    className={classes.button}
+                    onClick={this.props.toggleInputHandler} 
+                    size="sm"
+                    outline color='warning'>
+                        Add Items 
+                        <FontAwesomeIcon icon='plus'/>
+                </Button>)
          } else if (this.props.activeTab ==='2'){
              items = this.props.mediumTerm
+             backgroundStyle = classes.mediumBack
+             buttonElement =(
+                <Button 
+                    className={classes.button}
+                    onClick={this.props.toggleInputHandler} 
+                    size="sm"
+                    outline color='primary'>
+                        Add Items 
+                        <FontAwesomeIcon icon='plus'/>
+                </Button>)
          } else if (this.props.activeTab ==='3'){
              items = this.props.longTerm
+             backgroundStyle=classes.longBack
+             buttonElement =(
+                <Button 
+                    className={classes.button}
+                    onClick={this.props.toggleInputHandler} 
+                    size="sm"
+                    outline color='danger'>
+                        Add Items 
+                        <FontAwesomeIcon icon='plus'/>
+                </Button>)
          }
          if(items && items.length !== 0 ){
              itemElement = items.map((i,index)=>{
                  return <Items
-                        className={classes.items}
                         id={index}
                         name={i.itemName}
                         key={index}
@@ -78,19 +110,20 @@ class List extends Component{
          }
 
         return(
-            <div className={classes.items}>
+            <div className={[classes.items,backgroundStyle].join(' ')}>
                 <ListGroup> 
                     {itemElement}
                 </ListGroup>
                <hr className={classes.hr}/>
-                <Button 
+               {buttonElement}
+                {/* <Button 
                 className={classes.button}
                 onClick={this.props.toggleInputHandler} 
                 size="sm"
-                outline color='info'>
+                outline color='warning'>
                     Add Items 
-                    <FontAwesomeIcon icon='plus'/>
-                </Button>
+                     <FontAwesomeIcon icon='plus'/>
+                </Button> */}
                 {inputElement}
             </div>
         )

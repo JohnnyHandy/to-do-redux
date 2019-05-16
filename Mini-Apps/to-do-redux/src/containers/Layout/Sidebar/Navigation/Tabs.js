@@ -22,10 +22,19 @@ class Tabs extends Component{
                     id:'3',
                 }
             ]
-            const backgroundColors=['#f27c54','#29c8e8','#ff87f7']
+            const backgroundColors=['#2b3252','#ef5455','#fad744']
+            const fontColors = ['#fad744','#2b3252','#ef5455']
+            let border = undefined
             const navItems = tabItems.map((i,index)=>{
+                if(i.id==='1'){
+                    border='15px 0 0 '
+                } else{
+                    border=''
+                }
                 let styledColor = {
-                    backgroundColor:backgroundColors[index]
+                    backgroundColor:backgroundColors[index],
+                    color:fontColors[index],
+                    borderRadius:border
                 }
                 return (
                     <NavItem 
@@ -48,13 +57,10 @@ class Tabs extends Component{
                     </Nav>
                     <TabContent activeTab = {this.props.tabId} >
                         <TabPane tabId='1'>
-                            Short Term
                         </TabPane>
                         <TabPane tabId='2'>
-                            Medium Term
                         </TabPane>
                         <TabPane tabId='3'>
-                            Long Term
                         </TabPane>
                     </TabContent>
                 </React.Fragment>

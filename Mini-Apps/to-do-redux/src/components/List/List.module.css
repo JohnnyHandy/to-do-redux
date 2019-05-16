@@ -1,14 +1,49 @@
 .items{
     box-sizing:border-box;
     font-family: 'Roboto Mono', monospace;
-    margin:auto;
+    margin:0;
     width:100%;
-    padding:0 20px 0 20px
+    height:100%;
+    padding:15px 20px;
+    border-radius:0 0 0 15px
 }
 
+.shortBack{
+    background-color:#2b3252;
+    color:#fad744
+}
+
+.shortBack ul li{
+    background-color:#fad744;
+    color: #2b3252;
+}
+
+.mediumBack{
+    background-color:#ef5455;
+    color:#2b3252
+}
+
+.mediumBack ul li{
+    background-color:#2b3252;
+    color:#ef5455
+}
+
+.longBack{
+    background-color:#fad744;
+    color:#ef5455
+}
+
+.longBack ul li{
+    background-color:#ef5455;
+    color:#fad744;
+    
+}
+
+
+
+
 .items ul li{
-    background-color:#c5eadb;
-    margin-top:15px
+    margin-top:15px;
 }
 
 .hr{

@@ -5,8 +5,12 @@
     border: 1px solid lightsteelblue;
     text-align:center;
     margin:auto;
-    background-color:#a7e2cb !important
+    border-radius:15px
+
 }
+ .sidebar div{
+     border-radius:0 0 0 15px
+ }
 
 .List{
     margin:0;
