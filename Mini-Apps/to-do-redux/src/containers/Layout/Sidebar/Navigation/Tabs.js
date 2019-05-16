@@ -25,12 +25,15 @@ class Tabs extends Component{
             const backgroundColors=['#2b3252','#ef5455','#fad744']
             const fontColors = ['#fad744','#2b3252','#ef5455']
             let border = undefined
+            let borderRight = classes.tabRight
             const navItems = tabItems.map((i,index)=>{
                 if(i.id==='1'){
-                    border='15px 0 0 '
-                } else{
-                    border=''
-                }
+                    border='15px 0 0 0'
+                }else if(i.id==='2'){
+                    border='0 0 0 0'   
+                }else if(i.id==='3'){
+                    border = borderRight
+                } 
                 let styledColor = {
                     backgroundColor:backgroundColors[index],
                     color:fontColors[index],
@@ -40,7 +43,7 @@ class Tabs extends Component{
                     <NavItem 
                     key={index} 
                     onClick={()=>this.props.onClickTab(i.id)}
-                    className={classes.tabItems}
+                    className={[classes.tabItems,border].join(' ')}
                     style={styledColor}
                     >
                         <NavLink>
