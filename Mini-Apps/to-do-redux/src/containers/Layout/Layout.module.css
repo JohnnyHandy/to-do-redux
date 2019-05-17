@@ -1,5 +1,5 @@
 .Layout{
-    height:1024px;
+    height:auto;
     width:768px;
     box-sizing: border-box;
     text-align: center;
@@ -7,6 +7,8 @@
     border: 2px solid salmon;
     box-align: center;
     border-radius:15px;
+    padding-bottom:20px;
+    background:url('https://images.pexels.com/photos/97076/pexels-photo-97076.jpeg?cs=srgb&dl=notebook-pen-97076.jpg&fm=jpg')
 }
 @media only screen and (min-width:576px){
     .Layout div div:nth-child(1){
