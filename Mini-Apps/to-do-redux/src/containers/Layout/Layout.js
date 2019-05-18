@@ -5,13 +5,16 @@ import {Container, Card, CardGroup} from 'reactstrap'
 import Sidebar from './Sidebar/Sidebar'
 import Info from './Info/Info'
 import classes from './Layout.module.css'
+import Navbar from './Navbar/Navbar'
+import Modal from './Modal/Modal'
 
 class Layout extends Component{
 
     render(){
         return(
             <Container className={classes.Layout}>
-                <h1>To-Do-List</h1>
+                <Navbar/>
+                <Modal></Modal>
                 <CardGroup>
                     <Card >
                         <Sidebar />

@@ -15,8 +15,10 @@ const initialState ={
     nameInput:'',
     descInput:'',
     buttonText:'',
-    activeTab:'1'
+    activeTab:'1',
+    modal:false
 }
+
 
 const setState = (state,action)=>{
     return updateObject(state,{items:action.payload})
@@ -63,8 +65,7 @@ const addItem = (state,action)=>{
         lastEdited:undefined,
     }
   
-    // const updatedObject = updateObject(items,updateItem)
-    // console.log(updatedObject)
+
     const updatedArray = items.concat(updateItem)
     let updatedContent = undefined
     if(state.activeTab==='1'){
@@ -116,17 +117,8 @@ const deleteItem = (state,action)=>{
     } else if(state.activeTab==='3'){
         updatedContent = updateObject(state.items,{longTerm:deleteItems})
     }
-    // const updateItems = updateObject(state.items,updatedContent)
     return updateObject(state,{items:updatedContent,itemIndex:newIndex})
 
-    // return{
-    //     ...state,
-    //     items:[
-    //         ...state.items.slice(0,action.index),
-    //         ...state.items.slice(action.index+1)
-    //     ].map((item, index) => ( updateObject(item,{id:index}))),
-    //     itemIndex:newIndex
-    // }
 
 }
 
@@ -212,30 +204,6 @@ const editItem =(state,action)=>{
         input:false,
         itemIndex:newIndex
     })
-    // const editedObject = updateObject()
-    // return{
-    //     ...state.items,
-    //     items:[...state.items].map((item,index)=>{
-    //         if(index===state.editIndex){
-    //             newIndex = index
-    //             return ({
-    //                 ...item,
-    //                 itemName:state.newItem.itemName,
-    //                 itemDesc:state.newItem.itemDesc,
-    //                 lastEdited:new Date().toISOString().slice(0,10)
-    //             })
-    //         } else{
-    //             return ({...item})
-    //         }
-    //     }),
-        // edit:false,
-        // nameInput:'',
-        // descInput:'',
-        // editIndex:undefined,
-        // newItem:{},
-        // input:false,
-        // itemIndex:newIndex
-    // }
 }
 
 const changeItemIndex =(state,action)=>{
@@ -278,6 +246,11 @@ const toggleInputHandler = (state,action)=>{
 const setActiveTab =(state,action)=>{
      return updateObject(state,{activeTab:action.payload})
 }
+
+const toggleModal = (state,action)=>{
+    const updateModal = !state.modal
+    return updateObject(state,{modal:updateModal})
+}
 const reducer = (state=initialState,action)=>{
     switch(action.type){
         case actionTypes.SET_STATE:return setState(state,action);
@@ -292,6 +265,7 @@ const reducer = (state=initialState,action)=>{
         case actionTypes.INDEX_UP:return indexUp(state,action);
         case actionTypes.TOGGLE_INPUT_HANDLER:return toggleInputHandler(state,action);
         case actionTypes.SET_ACTIVE_TAB:return setActiveTab(state,action);
+        case actionTypes.TOGGLE_MODAL:return toggleModal(state,action)
         default: return state
     }
 }

@@ -10,9 +10,14 @@
     padding-bottom:20px;
     background:url(https://images.pexels.com/photos/97076/pexels-photo-97076.jpeg?cs=srgb&dl=notebook-pen-97076.jpg&fm=jpg)
 }
+
+.Layout nav{
+    margin:10px 0;
+    border-radius:15px
+}
 @media only screen and (min-width:576px){
     .Layout div div:nth-child(1){
-        border-radius:15px 0 0 15px
+        border-radius:15px 0 0 15px;
     }
     
     .Layout div div:nth-child(2){
@@ -28,7 +33,7 @@
 
 @media only screen and (max-width:576px){
     .Layout div div:nth-child(1){
-        border-radius:15px
+        border-radius:15px;
     }
     
     .Layout div div:nth-child(2){

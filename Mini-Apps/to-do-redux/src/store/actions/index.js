@@ -12,4 +12,8 @@ export {
     itemIndexChanger,
     initialState,
     setActiveTab
-} from './listControl'
+} from './listControl';
+
+export{
+    toggleModal
+} from './authControl'
