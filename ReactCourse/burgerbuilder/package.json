@@ -17,6 +17,8 @@
     "css-loader": "2.1.1",
     "dotenv": "8.0.0",
     "dotenv-expand": "5.1.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
     "eslint": "5.16.0",
     "eslint-config-react-app": "^4.0.0",
     "eslint-loader": "2.1.2",
@@ -46,6 +48,7 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
+    "react-test-renderer": "^16.8.6",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "resolve": "1.10.1",
@@ -81,10 +84,6 @@
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
-    ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
     "transform": {
@@ -113,9 +112,8 @@
       "node"
     ],
     "watchPlugins": [
-      "/home/ubuntu/workspace/ReactCourse/burgerbuilder/node_modules/jest-watch-typeahead/filename.js",
-      "/home/ubuntu/workspace/ReactCourse/burgerbuilder/node_modules/jest-watch-typeahead/testname.js"
-    ]
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"]
   },
   "babel": {
     "presets": [
