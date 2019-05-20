@@ -15,5 +15,8 @@ export {
 } from './listControl';
 
 export{
-    toggleModal
+    toggleModal,
+    authStart,
+    authSuccess,
+    authFail
 } from './authControl'

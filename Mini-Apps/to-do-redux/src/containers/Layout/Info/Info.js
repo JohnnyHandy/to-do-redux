@@ -47,13 +47,13 @@ const Info = (props)=>{
     )
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = (state) =>{
     return{
-        shortTerm:state.items.shortTerm,
-        mediumTerm:state.items.mediumTerm,
-        longTerm:state.items.longTerm,
-        activeTab:state.activeTab,
-        itemIndex: state.itemIndex
+        shortTerm:state.reducer.items.shortTerm,
+        mediumTerm:state.reducer.items.mediumTerm,
+        longTerm:state.reducer.items.longTerm,
+        activeTab:state.reducer.activeTab,
+        itemIndex: state.reducer.itemIndex
     }
 }
 

@@ -11,3 +11,7 @@ export const INDEX_UP = 'INDEX_UP'
 export const TOGGLE_INPUT_HANDLER = 'TOGGLE_INPUT_HANDLER'
 export const SET_ACTIVE_TAB = 'SET_ACTIVE_TAB'
 export const TOGGLE_MODAL='TOGGLE_MODAL'
+
+export const AUTH_START='AUTH_START';
+export const AUTH_SUCCESS='AUTH_START';
+export const AUTH_FAIL='AUTH_START';

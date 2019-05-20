@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from 'react-redux'
-import axios from '../../axios'
+// import axios from '../../axios'
 import * as actionCreators from '../../store/actions/index'
 
 import classes from './List.module.css'
@@ -132,12 +132,12 @@ class List extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-        shortTerm:state.items.shortTerm,
-        mediumTerm:state.items.mediumTerm,
-        longTerm:state.items.longTerm,
-        input:state.input,
-        state:state,
-        activeTab:state.activeTab
+        shortTerm:state.reducer.items.shortTerm,
+        mediumTerm:state.reducer.items.mediumTerm,
+        longTerm:state.reducer.items.longTerm,
+        input:state.reducer.input,
+        state:state.reducer,
+        activeTab:state.reducer.activeTab
     }
 }
 

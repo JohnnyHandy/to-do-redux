@@ -16,7 +16,8 @@ const initialState ={
     descInput:'',
     buttonText:'',
     activeTab:'1',
-    modal:false
+    modal:false,
+    modalType:''
 }
 
 
@@ -248,8 +249,9 @@ const setActiveTab =(state,action)=>{
 }
 
 const toggleModal = (state,action)=>{
+    console.log(action.modalType)
     const updateModal = !state.modal
-    return updateObject(state,{modal:updateModal})
+    return updateObject(state,{modal:updateModal,modalType:action.modalType})
 }
 const reducer = (state=initialState,action)=>{
     switch(action.type){

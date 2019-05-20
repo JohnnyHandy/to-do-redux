@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore,applyMiddleware,compose} from 'redux'
+import {createStore,applyMiddleware,compose,combineReducers} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reducer from './store/reducer/reducer'
+import authReducer from './store/reducer/auth'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const logger = store =>{
@@ -20,9 +21,14 @@ const logger = store =>{
     }
 }
 
+const rootReducer = combineReducers({
+    reducer:reducer,
+    auth:authReducer
+})
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer,composeEnhancers(applyMiddleware(logger,thunk)));
+const store = createStore(rootReducer,composeEnhancers(applyMiddleware(logger,thunk)));
 store.subscribe(()=>{
     console.log(['Subscription'], store.getState())
 })

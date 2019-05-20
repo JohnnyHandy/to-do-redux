@@ -75,7 +75,7 @@ class Tabs extends Component{
    
 const mapStateToProps = (state)=>{
     return {
-        tabId:state.activeTab
+        tabId:state.reducer.activeTab
     }
 }
 

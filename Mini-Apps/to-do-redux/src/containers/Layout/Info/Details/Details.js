@@ -64,11 +64,11 @@ const Details = (props)=>{
 
 const mapStateToProps = state =>{
     return{
-        itemIndex:state.itemIndex,
-        shortTerm:state.items.shortTerm,
-        mediumTerm:state.items.mediumTerm,
-        longTerm:state.items.longTerm,
-        activeTab:state.activeTab
+        itemIndex:state.reducer.itemIndex,
+        shortTerm:state.reducer.items.shortTerm,
+        mediumTerm:state.reducer.items.mediumTerm,
+        longTerm:state.reducer.items.longTerm,
+        activeTab:state.reducer.activeTab
         // items:state.items
     }
 }
