@@ -18,5 +18,7 @@ export{
     toggleModal,
     authStart,
     authSuccess,
-    authFail
+    authFail,
+    changeEmail,
+    changePassword
 } from './authControl'
