@@ -3,7 +3,14 @@ import {Button, Form, FormGroup, Label, Input} from 'reactstrap'
 import {connect} from 'react-redux'
 import * as actions from '../../../store/actions/index'
 
+
+
 class Auth extends Component{
+
+    state={
+        
+    }
+
     submitHandler =(event)=>{
         event.preventDefault()
         this.props.onAuth(this.props.email,this.props.password,this.props.isSignup)

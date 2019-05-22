@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes'
+import axios from 'axios'
 
 export const toggleModal = (modalType)=>{
     if(modalType === undefined){
@@ -44,8 +45,22 @@ export const authFail = (error)=>{
     };
 }
 
-export const auth = (email,password,isSignup)=>{
+export const auth = (email,password)=>{
     return dispatch=>{
-        dispatch(authStart())
+        dispatch(authStart());
+        const authData = {
+            email:email,
+            password:password,
+            returnSecureToken:true
+        }
+        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAmkXLcXaz3MYlH2LaGMCmaAafyWDAQVbA',authData)
+        .then(response=>{
+            console.log(response);
+            dispatch(authSuccess(response.data));
+        })
+        .catch(err=>{
+            console.log(err);
+            dispatch(authFail());
+        })
     }
 }

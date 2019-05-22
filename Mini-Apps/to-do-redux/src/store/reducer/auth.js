@@ -3,8 +3,8 @@ import {updateObject} from './utility'
 
 const initialState = {
     authForm:{
-        email:undefined,
-        password:undefined
+        email:'',
+        password:''
     }
 }
 
