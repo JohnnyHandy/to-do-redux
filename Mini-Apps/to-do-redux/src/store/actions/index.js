@@ -16,6 +16,7 @@ export {
 
 export{
     toggleModal,
+    auth,
     authStart,
     authSuccess,
     authFail,
