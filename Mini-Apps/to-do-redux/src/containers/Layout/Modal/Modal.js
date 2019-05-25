@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 
 import Auth from '../Auth/Auth'
 import BasicExample from '../Auth/newAuth'
+import ModalForm from '../Auth/modalForm'
 
 import * as actionTypes from '../../../store/actions/index'
 
@@ -14,7 +15,8 @@ const modal = (props)=>{
             <ModalHeader>{props.title}</ModalHeader>
             <ModalBody>
                 {/* <Auth/> */}
-                <BasicExample/>
+                {/* <BasicExample/> */}
+            <ModalForm/>
             </ModalBody>
         </Modal>
     )

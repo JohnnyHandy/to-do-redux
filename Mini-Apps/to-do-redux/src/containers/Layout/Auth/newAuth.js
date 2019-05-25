@@ -1,43 +1,82 @@
-import React from 'react'
-import {Button, FormGroup,FormFeedback, Label} from 'reactstrap'
-import {Formik,Form, Field,ErrorMessage} from 'formik'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Button, FormGroup, Label,Alert,Col} from 'reactstrap'
+import {Formik,Form, Field,} from 'formik'
 import * as yup from 'yup'
+import classes from './Auth.module.css'
 
 const validations = yup.object().shape({
-    email:yup.string().email().required(),
-    password:yup.string().min(2).required()
+    email:yup.string().email().required('Email is Required'),
+    password:yup.string().min(2,'Minimum of 2 characters').required('Password is Required')
 })
 
-const myForm = ({
-    values,
-    touched,
-    errors,
-    dirty,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    handleReset,
-  }) => {
+
+class myForm extends Component {
+    state={
+        formControl:{
+            email:'',
+            password:''
+        }
+    }
+    render(){
+
+       const handleEmailChange = (event) =>{
+            console.log(event.target.value)
+        }
+
+        return(
+            <Formik 
+                initialValues={{email:this.state.formControl.email,password:this.state.formControl.password}} 
+                onSubmit = {
+                    (values)=>{
+                        alert(JSON.stringify(values))
+                    }
+                }
+                validationSchema={validations}>
+                {(
+                    {
+                        values,
+                        touched,
+                        errors,
+                        dirty,
+                        isSubmitting,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        handleReset,
+                      }
+                )=>(
+                    <Form onSubmit={handleSubmit} className={classes.form}>   
+                        <FormGroup row>
+                            <Label for='email' sm={2}>Email</Label>
+                            <Col sm={10}>
+                                <Field className='form-control' type='email' name='email' id='email' placeholder='Place your Email' value={values.email}/>
+                                {errors.email && touched.email && <Alert color='danger'>{errors.email}</Alert>}
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for='password' sm={2}>Password</Label>
+                            <Col sm={10}>
+                                <Field className='form-control' onChange={handleChange} type='password' name='password' id='password' placeholder='Insert your password' value={values.password}/>
+                                {errors.password && touched.password && <Alert color='danger'>{errors.password}</Alert>}
+                            </Col>
+                        </FormGroup>
+                            <Button type='submit'>Submit</Button>
+                    </Form>
+                )}
+            </Formik>
+        )
+    }
     
-    return(
-        <Formik initialValues={{email:'cool@gmail.com',password:''}} onSubmit = {handleSubmit} validationSchema={validations}>
-            {()=>(
-                <Form onSubmit={handleSubmit} >
-                    <FormGroup>
-                        <Label for='email'>Email</Label>
-                        <Field type='email' name='email' id='email' placeholder='Place your Email'/>
-                        <ErrorMessage component='span' name='email' />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for='password'>Password</Label>
-                        <Field type='password' name='password' id='password' placeholder='Insert your password'/>
-                        <ErrorMessage component='span' name='password' />
-                    </FormGroup>
-                    <Button type='submit'>Submit</Button>
-                </Form>
-            )}
-        </Formik>
-    )
 }
-export default myForm
+
+const mapStateToProps = state =>{
+    return
+}
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        
+    }
+}
+export default connect()(myForm)
