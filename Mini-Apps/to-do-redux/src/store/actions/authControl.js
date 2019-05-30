@@ -25,7 +25,9 @@ export const changePassword = (event)=>{
     }
 }
 
-export const authStart = ()=>{
+export const authStart = (email,password)=>{
+    console.log('email=> '+email)
+    console.log('password=> '+password)
     return{
         type:actionTypes.AUTH_START
     }

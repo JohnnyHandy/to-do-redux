@@ -1,9 +1,6 @@
 import React from 'react'
 import {Modal,ModalHeader,ModalBody} from 'reactstrap'
 import {connect} from 'react-redux'
-
-import Auth from '../Auth/Auth'
-import BasicExample from '../Auth/newAuth'
 import ModalForm from '../Auth/modalForm'
 
 import * as actionTypes from '../../../store/actions/index'
@@ -14,9 +11,7 @@ const modal = (props)=>{
         <Modal isOpen={props.modal} toggle={props.toggleModal}>
             <ModalHeader>{props.title}</ModalHeader>
             <ModalBody>
-                {/* <Auth/> */}
-                {/* <BasicExample/> */}
-            <ModalForm/>
+                <ModalForm/>
             </ModalBody>
         </Modal>
     )

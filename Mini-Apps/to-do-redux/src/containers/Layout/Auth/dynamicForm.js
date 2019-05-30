@@ -1,7 +1,9 @@
-import React, {Component, Fragment} from 'react'
-import {Formik,Field} from 'formik'
-import {Label,FormGroup,Col} from 'reactstrap'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
+import * as actions from '../../../store/actions/index'
+import {Formik,Field,ErrorMessage} from 'formik'
+import {Label,FormGroup,Col,Alert,Button} from 'reactstrap'
 import classes from './Auth.module.css'
 
 class DynamicForm extends Component{
@@ -35,6 +37,11 @@ class DynamicForm extends Component{
                         )
                     }}
                 />
+                <ErrorMessage
+                    name='password'
+                    render={msg => <Alert color='danger' className={classes.error}>{msg}</Alert> }
+                    className={classes.error}
+                />
             </Col>
         </FormGroup>
         )
@@ -51,12 +58,16 @@ class DynamicForm extends Component{
                             const {field} = props;
                             return(
                                 <input
-                                    className='form-control'
                                     {...field}
+                                    className='form-control'
                                     type='email' 
-                                />
+                                /> 
                             )
                         }}
+                    />
+                    <ErrorMessage
+                        name='email'
+                        render={msg => <Alert color='danger' className={classes.error}>{msg}</Alert> }
                     />
                 </Col>   
             </FormGroup>
@@ -84,23 +95,27 @@ class DynamicForm extends Component{
         const initialValues = this.getInitialValues(this.props.fields);
 
         return(
-            <div>
                 <Formik
-                    onSubmit={(values)=>{console.log(values)}}
+                    onSubmit={(values)=>{this.props.onSubmit(values.email,values.password)}}
                     validationSchema={this.props.validation}
                     initialValues={initialValues}
                     render={(form)=>{
                         return (
                                 <form onSubmit = {form.handleSubmit} className={classes.form}>
                                     {this.renderFields(this.props.fields)}
-                                    <button type='submit'>Submit</button>
+                                    <Button color='primary' type='submit'>Submit</Button>
                                 </form>
                         )
                     }}
                 />
-            </div>
         )
     }
 }
 
-export default DynamicForm
+const mapDispatchToProps = dispatch =>{
+    return{
+        onSubmit:(email,password)=>{dispatch(actions.authStart(email,password))}
+    }
+}
+
+export default connect(null,mapDispatchToProps)(DynamicForm)

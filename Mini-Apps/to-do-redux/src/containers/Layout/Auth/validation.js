@@ -1,12 +1,14 @@
 import * as Yup from 'yup'
 
-const alpha = /^[a-zA-Z_]+( [a-zA-Z_]+)*$/;
 
 const validation = Yup.object().shape({
-    firstName: Yup.string()
-      .matches(alpha, {message: "Enter Valid Name", excludeEmptyString: true })
-      .required()
+    email: Yup.string()
+      .email()
+      .required('A valid email adress is required')
       .max(35),
+    password:Yup.string()
+    .required('A valid password is required')
+    .max(8)
   });
   
   export default validation;
