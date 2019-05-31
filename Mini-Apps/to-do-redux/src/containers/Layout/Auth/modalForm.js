@@ -21,7 +21,10 @@ class ModalForm extends Component{
             }
         ]
         return(
-            <DynamicForm fields={fields} validation={validation}/>
+            <div>
+                <DynamicForm type={this.props.type} fields={fields} validation={validation}/>
+            </div>
+            
         )
     }
 }

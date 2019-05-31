@@ -3,8 +3,10 @@ import {connect} from 'react-redux'
 
 import * as actions from '../../../store/actions/index'
 import {Formik,Field,ErrorMessage} from 'formik'
-import {Label,FormGroup,Col,Alert,Button} from 'reactstrap'
+import {FormGroup,Col,Alert,Button} from 'reactstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classes from './Auth.module.css'
+
 
 class DynamicForm extends Component{
 
@@ -21,19 +23,25 @@ class DynamicForm extends Component{
 
     renderPassword(input){
         return(
-        <FormGroup row key={input.name}>
-            <Label sm={2}>{input.label}</Label>
-            <Col sm={10}>
+        <FormGroup row key={input.name} >
+            <Col sm={12}>
                 <Field
                 name={input.name}
                 render={(props)=>{
                     const {field}=props;
                     return (
-                        <input 
-                            className='form-control' 
-                            {...field}
-                            type='password'
-                        />
+                        <div className='input-group'>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><FontAwesomeIcon icon='lock' /></div>
+                            </div>
+                            <input 
+                                placeholder='Password'
+                                className='form-control'
+                                {...field}
+                                type='password'
+                            />
+                        </div>
+                        
                         )
                     }}
                 />
@@ -50,18 +58,24 @@ class DynamicForm extends Component{
     renderEmail(input){
         return(
             <FormGroup row key={input.name}>
-                <Label sm={2}>{input.label}</Label>
-                <Col sm={10}>
+                <Col sm={12}>
                     <Field
                         name={input.name}
                         render={(props)=>{
                             const {field} = props;
                             return(
-                                <input
-                                    {...field}
-                                    className='form-control'
-                                    type='email' 
-                                /> 
+                                <div className='input-group'>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">@</div>
+                                    </div>
+                                     <input
+                                        placeholder='Email'
+                                        {...field}
+                                        className='form-control'
+                                        type='email' 
+                                    /> 
+                                </div>
+                               
                             )
                         }}
                     />
@@ -96,7 +110,7 @@ class DynamicForm extends Component{
 
         return(
                 <Formik
-                    onSubmit={(values)=>{this.props.onSubmit(values.email,values.password)}}
+                    onSubmit={(values)=>{this.props.onSubmit(values.email,values.password,this.props.type)}}
                     validationSchema={this.props.validation}
                     initialValues={initialValues}
                     render={(form)=>{
@@ -114,7 +128,7 @@ class DynamicForm extends Component{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onSubmit:(email,password)=>{dispatch(actions.authStart(email,password))}
+        onSubmit:(email,password,method)=>{dispatch(actions.auth(email,password,method))}
     }
 }
 
