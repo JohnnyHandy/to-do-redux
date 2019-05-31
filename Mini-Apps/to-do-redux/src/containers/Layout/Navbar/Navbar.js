@@ -1,28 +1,20 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Navbar,NavbarBrand,Nav,NavLink,NavItem} from 'reactstrap'
+import {Navbar,NavbarBrand,Nav,NavLink,NavItem,Button} from 'reactstrap'
+import classes from './Navbar.module.css'
 
 import * as actionTypes from '../../../store/actions/index'
 
 class navbar extends Component{
     render(){
-        let modalType = ''
         return(
             <Navbar color = 'light'>
                 <NavbarBrand>To-do-redux</NavbarBrand>
                 <Nav>
                     <NavItem>
-                        <NavLink onClick={()=>{
-                            modalType = 'Sign In'
-                            this.props.toggleModal(modalType)
-                        }} >
-                            Login</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink onClick={()=>{
-                            modalType = 'Sign Up'
-                            this.props.toggleModal(modalType)
-                        }}>Register</NavLink>
+                        <NavLink onClick={this.props.toggleModal} className={classes.navLink} >
+                            <Button>Authentication</Button>
+                            </NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>
@@ -32,7 +24,7 @@ class navbar extends Component{
 
 const mapDispatchToProps = dispatch => {
     return{
-        toggleModal:(modalType)=>dispatch(actionTypes.toggleModal(modalType))
+        toggleModal:()=>dispatch(actionTypes.toggleModal())
     }
 }
 

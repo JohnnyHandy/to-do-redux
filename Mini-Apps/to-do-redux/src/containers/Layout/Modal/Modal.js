@@ -13,7 +13,7 @@ const modal = (props)=>{
         <Modal size='lg' isOpen={props.modal} toggle={props.toggleModal}>
             <Row>
                 <Col sm={12}>
-                    <CardHeader>Authentication Page
+                    <CardHeader className={classes.cardHeader} >Authentication Page
                         <Button close onClick={props.toggleModal}><FontAwesomeIcon icon='times'/></Button> 
                     </CardHeader>
                 </Col>

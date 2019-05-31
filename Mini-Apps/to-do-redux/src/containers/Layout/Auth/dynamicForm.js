@@ -66,7 +66,7 @@ class DynamicForm extends Component{
                             return(
                                 <div className='input-group'>
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">@</div>
+                                        <div class="input-group-text"><FontAwesomeIcon icon='at'/></div>
                                     </div>
                                      <input
                                         placeholder='Email'

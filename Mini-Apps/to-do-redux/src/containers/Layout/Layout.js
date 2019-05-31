@@ -12,18 +12,21 @@ import Modal from './Modal/Modal'
 class Layout extends Component{
 
     render(){
+        console.log(this.props.background)
+
         return(
             <Container className={classes.Layout}>
-                <Navbar/>
-                <Modal/>
-                <CardGroup>
-                    <Card >
-                        <Sidebar />
-                    </Card>
-                    <Card >
-                        <Info/>
-                    </Card>
-                </CardGroup>
+                    
+                    <Navbar/>
+                    <Modal/>
+                    <CardGroup>
+                        <Card >
+                            <Sidebar />
+                        </Card>
+                        <Card >
+                            <Info/>
+                        </Card>
+                    </CardGroup>
             </Container>
         )
     } 
