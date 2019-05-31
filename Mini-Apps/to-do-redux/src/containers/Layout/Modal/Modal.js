@@ -19,13 +19,13 @@ const modal = (props)=>{
                 </Col>
             </Row>            
             <Row>
-                <Col className={classes.col} lg={6} md={6} sm={6} style={{paddingRight: 0}}> 
+                <Col className={classes.colRight} lg={6} md={6} sm={6}> 
                     <ModalHeader className={classes.header}>Sign-In</ModalHeader>
-                    <ModalBody>
+                    <ModalBody className={classes.modalBody}>
                         <ModalForm type='Sign-In'/>
                     </ModalBody>
                 </Col>
-                <Col lg={6} md={6} sm={6} style={{paddingLeft: 0}}> 
+                <Col className={classes.colLeft} lg={6} md={6} sm={6}> 
                     <ModalHeader className={classes.header}>Sign-Up</ModalHeader>
                     <ModalBody>
                         <ModalForm type='Sign-Up'/>
