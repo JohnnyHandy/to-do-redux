@@ -31,8 +31,8 @@ class DynamicForm extends Component{
                     const {field}=props;
                     return (
                         <div className='input-group'>
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><FontAwesomeIcon icon='lock' /></div>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text"><FontAwesomeIcon icon='lock' /></div>
                             </div>
                             <input 
                                 placeholder='Password'
@@ -65,8 +65,8 @@ class DynamicForm extends Component{
                             const {field} = props;
                             return(
                                 <div className='input-group'>
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><FontAwesomeIcon icon='at'/></div>
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text"><FontAwesomeIcon icon='at'/></div>
                                     </div>
                                      <input
                                         placeholder='Email'

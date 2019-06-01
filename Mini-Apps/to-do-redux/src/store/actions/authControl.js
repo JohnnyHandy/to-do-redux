@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
+
 export const toggleModal = (modalType)=>{
     if(modalType === undefined){
         modalType = ''
@@ -46,6 +47,7 @@ export const authFail = (error)=>{
 }
 
 export const auth = (email,password,method)=>{
+    console.log(method)
     return dispatch=>{
         dispatch(authStart());
         const authData = {
@@ -53,11 +55,11 @@ export const auth = (email,password,method)=>{
             password:password,
             returnSecureToken:true
         }
-        let url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAmkXLcXaz3MYlH2LaGMCmaAafyWDAQVbA'
+        let url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key='+process.env.REACT_APP_G_KEY
         if(method==='Sign-Up'){
-            url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAmkXLcXaz3MYlH2LaGMCmaAafyWDAQVbA'
+            url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key='+process.env.REACT_APP_G_KEY
         }else if(method==='Sign-In'){
-            url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAmkXLcXaz3MYlH2LaGMCmaAafyWDAQVbA'
+            url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key='+process.env.REACT_APP_G_KEY
         }
         axios.post(url,authData)
         .then(response=>{
@@ -66,7 +68,7 @@ export const auth = (email,password,method)=>{
         })
         .catch(err=>{
             console.log(err);
-            dispatch(authFail());
+            dispatch(authFail(err));
         })
     }
 }

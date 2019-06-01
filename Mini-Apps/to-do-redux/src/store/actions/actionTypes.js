@@ -16,5 +16,5 @@ export const TOGGLE_MODAL='TOGGLE_MODAL'
 export const EMAIL_CHANGE='EMAIL_CHANGE'
 export const PASSWORD_CHANGE='PASSWORD_CHANGE'
 export const AUTH_START='AUTH_START';
-export const AUTH_SUCCESS='AUTH_START';
-export const AUTH_FAIL='AUTH_START';
+export const AUTH_SUCCESS='AUTH_SUCCESS';
+export const AUTH_FAIL='AUTH_FAIL';
