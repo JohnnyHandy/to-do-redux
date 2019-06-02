@@ -5,7 +5,7 @@ import * as actions from '../../../store/actions/index'
 import {Formik,Field,ErrorMessage} from 'formik'
 import {FormGroup,Col,Alert,Button} from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classes from './Auth.module.css'
+import classes from './dynamicForm.module.css'
 
 
 class DynamicForm extends Component{
