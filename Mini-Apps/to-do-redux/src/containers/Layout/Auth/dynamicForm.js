@@ -107,8 +107,14 @@ class DynamicForm extends Component{
     render(){
 
         const initialValues = this.getInitialValues(this.props.fields);
-
+        let errorMessage = null
+        if(this.props.error.error && (this.props.error.method === this.props.type)){
+            errorMessage = (
+                <Alert color='danger'>{this.props.error.error.message}</Alert>
+            )
+        }
         return(
+                
                 <Formik
                     onSubmit={(values)=>{this.props.onSubmit(values.email,values.password,this.props.type)}}
                     validationSchema={this.props.validation}
@@ -118,6 +124,7 @@ class DynamicForm extends Component{
                                 <form onSubmit = {form.handleSubmit} className={classes.form}>
                                     {this.renderFields(this.props.fields)}
                                     <Button color='primary' type='submit'>Submit</Button>
+                                    {errorMessage}
                                 </form>
                         )
                     }}
@@ -126,10 +133,17 @@ class DynamicForm extends Component{
     }
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        error:state.auth.error
+    }
+}
+
+
 const mapDispatchToProps = dispatch =>{
     return{
         onSubmit:(email,password,method)=>{dispatch(actions.auth(email,password,method))}
     }
 }
 
-export default connect(null,mapDispatchToProps)(DynamicForm)
+export default connect(mapStateToProps,mapDispatchToProps)(DynamicForm)

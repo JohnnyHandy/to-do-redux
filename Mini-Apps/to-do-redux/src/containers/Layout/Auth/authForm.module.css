@@ -1,0 +1,24 @@
+.header h5{
+    margin:auto
+}
+
+.cardHeader{
+    background-color: #abc9ed
+}
+
+@media only screen and (min-width:576px){
+    .colRight{
+        border-right:1px solid lightgray;
+        padding-right:0 !important
+    }
+    
+    .colLeft{
+        padding-left:0 !important
+    }
+}
+
+@media only screen and (max-width:576px){
+    .modalBody{
+        border-bottom:1px solid lightgray
+    }
+}

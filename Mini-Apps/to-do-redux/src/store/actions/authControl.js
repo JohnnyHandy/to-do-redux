@@ -2,6 +2,20 @@ import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
 
+export const logout = ()=>{
+    return{
+        type:actionTypes.AUTH_LOGOUT
+    }
+}
+
+export const checkAuthTimeout = (expirationTime)=>{
+    return dispatch =>{
+       setTimeout(()=>{
+            dispatch(logout())
+       },expirationTime*1000) 
+    }
+}
+
 export const toggleModal = (modalType)=>{
     if(modalType === undefined){
         modalType = ''
@@ -40,10 +54,11 @@ export const authSuccess = (token,userId)=>{
     }
 }
 
-export const authFail = (error)=>{
+export const authFail = (error,method)=>{
     return{
         type:actionTypes.AUTH_FAIL,
-        error:error
+        error:error,
+        method:method
     };
 }
 
@@ -66,10 +81,10 @@ export const auth = (email,password,method)=>{
         .then(response=>{
             console.log(response);
             dispatch(authSuccess(response.data));
+            dispatch(checkAuthTimeout(response.data.expiresIn))
         })
         .catch(err=>{
-            console.log(err);
-            dispatch(authFail(err));
+            dispatch(authFail(err.response.data.error,method));
         })
     }
 }

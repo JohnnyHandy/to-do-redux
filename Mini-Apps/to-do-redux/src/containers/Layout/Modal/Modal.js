@@ -9,7 +9,7 @@ import * as actionTypes from '../../../store/actions/index'
 const modal = (props)=>{
 
     let modalContent = props.loading ? <Spinner/> : <AuthForm/>
-
+    
     return(
         <Modal size='lg' isOpen={props.modal} toggle={props.toggleModal}>
             {modalContent}
@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
 const mapStatetoProps= (state) =>{
     return{
         modal:state.reducer.modal,
-        loading:state.auth.loading
+        loading:state.auth.loading,
     }
 }
 
