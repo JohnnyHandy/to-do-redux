@@ -64,20 +64,18 @@ const addItem = (state,action)=>{
         created:new Date().toISOString().slice(0,10),
         lastEdited:undefined,
     }
-  
 
     const updatedArray = items.concat(updateItem)
     let updatedContent = undefined
     if(state.activeTab==='1'){
-        updatedContent = updateObject(items,{shortTerm:updatedArray})
+        updatedContent = updateObject(state.items,{shortTerm:updatedArray})
     } else if(state.activeTab==='2'){
-        updatedContent = updateObject(items,{mediumTerm:updatedArray})
+        updatedContent = updateObject(state.items,{mediumTerm:updatedArray})
     } else if(state.activeTab==='3'){
-        updatedContent = updateObject(items,{longTerm:updatedArray})
+        updatedContent = updateObject(state.items,{longTerm:updatedArray})
     }
-    const updatedItems = updateObject(state.items,updatedContent)
     const updatedState = {
-        items:updatedItems,
+        items:updatedContent,
         newItem:{},
         input:false,
         edit:false,
