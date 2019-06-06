@@ -16,8 +16,7 @@ const initialState ={
     descInput:'',
     buttonText:'',
     activeTab:'1',
-    modal:false,
-    modalType:''
+    modal:false
 }
 
 

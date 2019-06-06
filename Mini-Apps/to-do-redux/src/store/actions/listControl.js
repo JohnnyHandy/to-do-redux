@@ -3,8 +3,9 @@ import * as actionTypes from './actionTypes'
 
 export const addItem = ()=>{
     return async (dispatch,getState)=>{
+        console.log(getState().items)
         await dispatch(addItemHandler());
-        // await axios.put('/list/items.json',getState().items)
+        // await axios.put('/list/items.json',getState().reducer.items)
         // .then(response=>console.log(response)).catch(error=>console.log(error.message))
     }
 }

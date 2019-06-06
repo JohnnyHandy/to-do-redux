@@ -116,14 +116,6 @@ class List extends Component{
                 </ListGroup>
                <hr className={classes.hr}/>
                {buttonElement}
-                {/* <Button 
-                className={classes.button}
-                onClick={this.props.toggleInputHandler} 
-                size="sm"
-                outline color='warning'>
-                    Add Items 
-                     <FontAwesomeIcon icon='plus'/>
-                </Button> */}
                 {inputElement}
             </div>
         )
@@ -137,7 +129,8 @@ const mapStateToProps = (state) =>{
         longTerm:state.reducer.items.longTerm,
         input:state.reducer.input,
         state:state.reducer,
-        activeTab:state.reducer.activeTab
+        activeTab:state.reducer.activeTab,
+        userId:state.auth.userId
     }
 }
 

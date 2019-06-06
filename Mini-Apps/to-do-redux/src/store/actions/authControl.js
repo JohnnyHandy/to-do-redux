@@ -3,6 +3,9 @@ import axios from 'axios'
 
 
 export const logout = ()=>{
+    localStorage.removeItem('token')
+    localStorage.removeItem('expirationTime')
+    localStorage.removeItem('userId')
     return{
         type:actionTypes.AUTH_LOGOUT
     }
@@ -16,13 +19,9 @@ export const checkAuthTimeout = (expirationTime)=>{
     }
 }
 
-export const toggleModal = (modalType)=>{
-    if(modalType === undefined){
-        modalType = ''
-    }
+export const toggleModal = ()=>{
     return{
         type:actionTypes.TOGGLE_MODAL,
-        modalType:modalType
     }
 }
 
@@ -80,11 +79,35 @@ export const auth = (email,password,method)=>{
         axios.post(url,authData)
         .then(response=>{
             console.log(response);
-            dispatch(authSuccess(response.data));
+            const expirationDate = new Date(new Date().getTime()+response.data.expiresIn*1000);
+            localStorage.setItem('token',response.data.idToken);
+            localStorage.setItem('expirationTime',expirationDate)
+            localStorage.setItem('userId',response.data.localId)
+            dispatch(authSuccess(response.data.idToken,response.data.localId));
             dispatch(checkAuthTimeout(response.data.expiresIn))
+            dispatch(toggleModal())
         })
         .catch(err=>{
             dispatch(authFail(err.response.data.error,method));
         })
+    }
+}
+
+export const authCheckState = ()=>{
+    return dispatch=>{
+        const token = localStorage.getItem('token');
+        if(!token){
+            dispatch(logout())
+        } else {
+            const expirationTime = new Date (localStorage.getItem('expirationTime'))
+            if(expirationTime <=new Date()){
+                dispatch(logout())
+            }else{
+                const userId = localStorage.getItem('userId')
+                dispatch(authSuccess(token,userId))
+                dispatch(checkAuthTimeout((expirationTime.getTime()-new Date().getTime())/1000))
+            }
+            
+        }
     }
 }

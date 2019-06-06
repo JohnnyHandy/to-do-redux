@@ -22,5 +22,6 @@ export{
     authFail,
     changeEmail,
     changePassword,
-    logout
+    logout,
+    authCheckState
 } from './authControl'
