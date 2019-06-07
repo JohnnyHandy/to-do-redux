@@ -12,7 +12,6 @@ import Modal from './Modal/Modal'
 class Layout extends Component{
 
     render(){
-        console.log(this.props.background)
 
         return(
             <Container className={classes.Layout}>

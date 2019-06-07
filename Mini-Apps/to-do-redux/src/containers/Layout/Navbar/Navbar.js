@@ -11,13 +11,12 @@ class navbar extends Component{
       this.handleButtonClick = this.handleButtonClick.bind(this);
     }
     handleButtonClick() {
-        console.log(document.activeElement);
-        this.buttonDOM.blur();
-        console.log(document.activeElement);
+        this.props.logout();
+        this.props.resetItemList();
       }
     render(){
         let authButton = this.props.isAuthenticated ? 
-            <Button  className={classes.navLink} onClick={this.props.logout} type="button">Logout</Button>:
+            <Button  className={classes.navLink} onClick={this.handleButtonClick} type="button">Logout</Button>:
             <Button  className={classes.navLink} onClick={this.props.toggleModal} type="button">Authentication</Button>
 
         return(
@@ -44,7 +43,8 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = dispatch => {
     return{
         toggleModal:()=>dispatch(actionTypes.toggleModal()),
-        logout:()=>dispatch(actionTypes.logout())
+        logout:()=>dispatch(actionTypes.logout()),
+        resetItemList:()=>dispatch(actionTypes.resetItemList())
     }
 }
 

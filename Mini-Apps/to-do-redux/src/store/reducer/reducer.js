@@ -249,6 +249,15 @@ const toggleModal = (state,action)=>{
     const updateModal = !state.modal
     return updateObject(state,{modal:updateModal})
 }
+
+const fetchItemsStart = (state,action)=>{
+    return updateObject(state,{items:action.items})
+}
+
+const resetItemList=(state,action)=>{
+    return updateObject(state,{items:initialState.items})
+}
+
 const reducer = (state=initialState,action)=>{
     switch(action.type){
         case actionTypes.SET_STATE:return setState(state,action);
@@ -263,7 +272,9 @@ const reducer = (state=initialState,action)=>{
         case actionTypes.INDEX_UP:return indexUp(state,action);
         case actionTypes.TOGGLE_INPUT_HANDLER:return toggleInputHandler(state,action);
         case actionTypes.SET_ACTIVE_TAB:return setActiveTab(state,action);
-        case actionTypes.TOGGLE_MODAL:return toggleModal(state,action)
+        case actionTypes.TOGGLE_MODAL:return toggleModal(state,action);
+        case actionTypes.FETCH_ITEMS_START:return fetchItemsStart(state,action);
+        case actionTypes.RESET_ITEM_LIST:return resetItemList(state,action);
         default: return state
     }
 }

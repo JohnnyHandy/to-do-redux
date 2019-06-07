@@ -31,13 +31,13 @@ class App extends Component {
       
   ]
     const random = backgroundArray[Math.floor(Math.random()*backgroundArray.length)]
-    console.log(random)
+
     return this.setState({background: random})
   }
 
 
   render() {
-    console.log(this.state.background)
+
     
     return (
       <div>

@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import {fetchItems, resetItemList} from './listControl';
 
 
 export const logout = ()=>{
@@ -51,7 +52,9 @@ export const authSuccess = (token,userId)=>{
         idToken:token,
         userId:userId
     }
+    
 }
+
 
 export const authFail = (error,method)=>{
     return{
@@ -84,6 +87,7 @@ export const auth = (email,password,method)=>{
             localStorage.setItem('expirationTime',expirationDate)
             localStorage.setItem('userId',response.data.localId)
             dispatch(authSuccess(response.data.idToken,response.data.localId));
+            dispatch(fetchItems())
             dispatch(checkAuthTimeout(response.data.expiresIn))
             dispatch(toggleModal())
         })
@@ -98,6 +102,7 @@ export const authCheckState = ()=>{
         const token = localStorage.getItem('token');
         if(!token){
             dispatch(logout())
+            dispatch(resetItemList())
         } else {
             const expirationTime = new Date (localStorage.getItem('expirationTime'))
             if(expirationTime <=new Date()){
@@ -106,8 +111,10 @@ export const authCheckState = ()=>{
                 const userId = localStorage.getItem('userId')
                 dispatch(authSuccess(token,userId))
                 dispatch(checkAuthTimeout((expirationTime.getTime()-new Date().getTime())/1000))
+                dispatch(fetchItems())
             }
             
         }
     }
 }
+

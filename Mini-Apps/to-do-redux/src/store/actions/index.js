@@ -11,7 +11,9 @@ export {
     deleteItem,
     itemIndexChanger,
     initialState,
-    setActiveTab
+    setActiveTab,
+    fetchItems,
+    resetItemList
 } from './listControl';
 
 export{

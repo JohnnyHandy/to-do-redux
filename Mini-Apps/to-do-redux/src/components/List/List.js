@@ -23,7 +23,9 @@ class List extends Component{
            
     //     }).catch(error=>console.log(error))
     //   }
-
+    // componentDidMount(){
+    //     this.props.fetchItems()
+    // }
     render(){
         let inputElement = null
          if(this.props.input){
@@ -144,7 +146,8 @@ const mapDispatchToProps = dispatch=>{
         editItemHandler:(index)=>dispatch(actionCreators.editItemHandler(index)),
         editItem:()=>dispatch(actionCreators.editItem()),
         itemIndexChanger:(index)=>dispatch(actionCreators.itemIndexChanger(index)),
-        initialState:(value)=>dispatch(actionCreators.initialState(value))
+        initialState:(value)=>dispatch(actionCreators.initialState(value)),
+        fetchItems:()=>dispatch(actionCreators.fetchItems())
     };
 }
 
