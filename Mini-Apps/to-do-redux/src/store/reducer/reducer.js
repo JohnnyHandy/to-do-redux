@@ -82,7 +82,8 @@ const addItem = (state,action)=>{
         itemIndex:newId,
         nameInput:'',
         descInput:'',
-        buttonText:''
+        buttonText:'',
+        error:null
     }
     return updateObject(state,updatedState)
 }
@@ -254,8 +255,12 @@ const fetchItemsStart = (state,action)=>{
     return updateObject(state,{items:action.items})
 }
 
+const fetchItemsFail = (state,action)=>{
+    return updateObject(state,{error:action.error})
+}
+
 const resetItemList=(state,action)=>{
-    return updateObject(state,{items:initialState.items})
+    return updateObject(state,{items:initialState.items,error:null})
 }
 
 const reducer = (state=initialState,action)=>{
@@ -275,6 +280,7 @@ const reducer = (state=initialState,action)=>{
         case actionTypes.TOGGLE_MODAL:return toggleModal(state,action);
         case actionTypes.FETCH_ITEMS_START:return fetchItemsStart(state,action);
         case actionTypes.RESET_ITEM_LIST:return resetItemList(state,action);
+        case actionTypes.FETCH_ITEMS_FAIL:return fetchItemsFail(state,action);
         default: return state
     }
 }

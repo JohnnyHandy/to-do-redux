@@ -79,19 +79,21 @@ export const fetchStart = (items)=>{
 }
 
 export const fetchItemsFail =(error)=>{
-    return (resetItemList())
+    return (resetItemList(),{type:actionTypes.FETCH_ITEMS_FAIL,error:error})
 }
 
 export const fetchItems = ()=>{
     return (dispatch,getState)=>{
-        if(getState().auth.userId)
+        if(getState().auth.token)
         {   
-            axios.get('users/'+getState().auth.userId+'/list/items.json')
+            axios.get('users/'+getState().auth.userId+'/list/items.json?auth='+getState().auth.token)
             .then(res=>{
-            dispatch(fetchStart(res.data))
+                if(res.data!=null){
+                    dispatch(fetchStart(res.data))
+                }
             }).catch(err=>{
-            console.log(err)
-            dispatch(fetchItemsFail())
+                console.log(err)
+                dispatch(fetchItemsFail(err.response.data))
             })
         }
     }

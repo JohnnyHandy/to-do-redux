@@ -66,7 +66,7 @@ export const authFail = (error,method)=>{
 
 export const auth = (email,password,method)=>{
     console.log(method)
-    return dispatch=>{
+    return (dispatch)=>{
         dispatch(authStart());
         const authData = {
             email:email,
@@ -98,7 +98,7 @@ export const auth = (email,password,method)=>{
 }
 
 export const authCheckState = ()=>{
-    return dispatch=>{
+    return (dispatch,getState)=>{
         const token = localStorage.getItem('token');
         if(!token){
             dispatch(logout())
