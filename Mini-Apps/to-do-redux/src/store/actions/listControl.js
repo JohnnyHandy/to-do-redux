@@ -5,7 +5,7 @@ export const addItem = ()=>{
     return async (dispatch,getState)=>{
         await dispatch(addItemHandler());
         if(getState().auth.userId){
-            await axios.put('users/'+getState().auth.userId+'/list/items.json',getState().reducer.items)
+            await axios.put('users/'+getState().auth.userId+'/list/items.json?auth='+getState().auth.token,getState().reducer.items)
             .then(response=>console.log(response)).catch(error=>console.log(error.message))
         }
     }
@@ -21,7 +21,7 @@ export const deleteItem = (index)=>{
     return async(dispatch,getState)=>{
         await dispatch(deleteItemHandler(index));
         if(getState().auth.userId){
-            await axios.put('users/'+getState().auth.userId+'/list/items.json',getState().reducer.items)
+            await axios.put('users/'+getState().auth.userId+'/list/items.json?auth='+getState().auth.token,getState().reducer.items)
             .then(response=>console.log(response)).catch(error=>console.log(error.message))
         }
     }
@@ -38,7 +38,7 @@ export const editItem = ()=>{
     return async(dispatch,getState)=>{
         await dispatch(editItemHandler());
         if(getState().auth.userId){
-            await axios.put('users/'+getState().auth.userId+'/list/items.json',getState().reducer.items)
+            await axios.put('users/'+getState().auth.userId+'/list/items.json?auth='+getState().auth.token,getState().reducer.items)
             .then(response=>console.log(response)).catch(error=>console.log(error.message))
         }
     }
@@ -71,7 +71,7 @@ export const setActiveTab = (index)=>{
     }
 }
 
-export const fetchStart = (items)=>{
+export const fetchItemsStart = (items)=>{
     return{
         type:actionTypes.FETCH_ITEMS_START,
         items:items
@@ -79,7 +79,18 @@ export const fetchStart = (items)=>{
 }
 
 export const fetchItemsFail =(error)=>{
-    return (resetItemList(),{type:actionTypes.FETCH_ITEMS_FAIL,error:error})
+    return (resetItemList(),
+    {
+        type:actionTypes.FETCH_ITEMS_FAIL,error:error
+    }
+    )
+}
+
+export const fetchItemsSucccess = (items)=>{
+    return{
+        type:actionTypes.FETCH_ITEMS_SUCCESS,
+        items:items
+    }
 }
 
 export const fetchItems = ()=>{
@@ -89,12 +100,15 @@ export const fetchItems = ()=>{
             axios.get('users/'+getState().auth.userId+'/list/items.json?auth='+getState().auth.token)
             .then(res=>{
                 if(res.data!=null){
-                    dispatch(fetchStart(res.data))
+                    dispatch(fetchItemsStart())
+                    dispatch(fetchItemsSucccess(res.data))
                 }
             }).catch(err=>{
                 console.log(err)
                 dispatch(fetchItemsFail(err.response.data))
             })
+        }else{
+
         }
     }
 }

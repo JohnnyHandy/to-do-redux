@@ -2,10 +2,31 @@ import React from 'react'
 
 import classes from './Spinner.module.css'
 
-const spinner =()=>(
-    <div className={classes.Loader}>
+export const AuthSpinner =()=>(
+    <div className={classes.authLoader}>
         Loading...
     </div>
 )
 
-export default spinner
+export const ShortItemsSpinner = ()=>(
+    <div className={classes.shortTerm}>
+        Loading...
+    </div>
+)
+
+export const MediumItemsSpinner = ()=>(
+    <div className={classes.mediumTerm}>
+        Loading...
+    </div>
+)
+
+export const LongItemsSpinner = ()=>(
+    <div className={classes.longTerm}>
+        Loading...
+    </div>
+)
+
+
+
+
+

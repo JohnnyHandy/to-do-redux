@@ -66,6 +66,7 @@ const addItem = (state,action)=>{
     }
 
     const updatedArray = items.concat(updateItem)
+    console.log(updatedArray)
     let updatedContent = undefined
     if(state.activeTab==='1'){
         updatedContent = updateObject(state.items,{shortTerm:updatedArray})
@@ -74,6 +75,7 @@ const addItem = (state,action)=>{
     } else if(state.activeTab==='3'){
         updatedContent = updateObject(state.items,{longTerm:updatedArray})
     }
+    console.log(updatedContent)
     const updatedState = {
         items:updatedContent,
         newItem:{},
@@ -83,7 +85,8 @@ const addItem = (state,action)=>{
         nameInput:'',
         descInput:'',
         buttonText:'',
-        error:null
+        error:null,
+        loading:false
     }
     return updateObject(state,updatedState)
 }
@@ -251,8 +254,22 @@ const toggleModal = (state,action)=>{
     return updateObject(state,{modal:updateModal})
 }
 
+const fetchItemsSuccess = (state,action)=>{
+    let items= initialState.items
+    if(action.items.shortTerm){
+        items.shortTerm = action.items.shortTerm
+    }
+    if(action.items.mediumTerm){
+        items.mediumTerm=action.items.mediumTerm
+    }
+    if(action.items.longTerm){
+        items.longTerm=action.items.longTerm
+    }
+    return updateObject(state,{items:items,loading:false,error:null})
+}
+
 const fetchItemsStart = (state,action)=>{
-    return updateObject(state,{items:action.items})
+    return updateObject(state,{loading:true})
 }
 
 const fetchItemsFail = (state,action)=>{
@@ -281,6 +298,7 @@ const reducer = (state=initialState,action)=>{
         case actionTypes.FETCH_ITEMS_START:return fetchItemsStart(state,action);
         case actionTypes.RESET_ITEM_LIST:return resetItemList(state,action);
         case actionTypes.FETCH_ITEMS_FAIL:return fetchItemsFail(state,action);
+        case actionTypes.FETCH_ITEMS_SUCCESS:return fetchItemsSuccess(state,action);
         default: return state
     }
 }

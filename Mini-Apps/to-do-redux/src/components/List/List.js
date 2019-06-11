@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component,Fragment} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from 'react-redux'
 // import axios from '../../axios'
@@ -8,24 +8,11 @@ import classes from './List.module.css'
 import {Button,ListGroup} from 'reactstrap'
 import Input from '../UI/Input/Input'
 import Items from './Items/Items'
+import {ShortItemsSpinner,MediumItemsSpinner,LongItemsSpinner} from '../UI/Spinner/Spinner'
 
 
 class List extends Component{
 
-    // componentWillMount() {
-    //     axios.get('/list/items.json')
-    //     .then(response=>{
-    //        console.log("response.data")
-    //        console.log(response.data)
-    //        if(response.data){
-    //         this.props.initialState(response.data)
-    //        }
-           
-    //     }).catch(error=>console.log(error))
-    //   }
-    // componentDidMount(){
-    //     this.props.fetchItems()
-    // }
     render(){
         let inputElement = null
          if(this.props.input){
@@ -52,13 +39,13 @@ class List extends Component{
                 buttonText={this.props.state.buttonText}/>
              )
          }
-        //  const backgroundColors=['#2b3252','#ef5455','#fad744']
-        //  const fontColors = ['#fad744','#2b3252','#ef5455']
          let itemElement = null
          let items = null
          let buttonElement = null
          let backgroundStyle = classes.shortBack
+         let Spinner = null
          if(this.props.activeTab === '1'){
+             Spinner = <ShortItemsSpinner/>
              items = this.props.shortTerm
              backgroundStyle = classes.shortBack
              buttonElement =(
@@ -71,6 +58,7 @@ class List extends Component{
                         <FontAwesomeIcon icon='plus'/>
                 </Button>)
          } else if (this.props.activeTab ==='2'){
+             Spinner = <MediumItemsSpinner/>
              items = this.props.mediumTerm
              backgroundStyle = classes.mediumBack
              buttonElement =(
@@ -83,6 +71,7 @@ class List extends Component{
                         <FontAwesomeIcon icon='plus'/>
                 </Button>)
          } else if (this.props.activeTab ==='3'){
+             Spinner = <LongItemsSpinner/>
              items = this.props.longTerm
              backgroundStyle=classes.longBack
              buttonElement =(
@@ -111,14 +100,19 @@ class List extends Component{
              itemElement = <h4 className={classes.items}>Please add an Item</h4>
          }
 
-        return(
-            <div className={[classes.items,backgroundStyle].join(' ')}>
+         let content = this.props.loading ? Spinner : (
+             <Fragment>
                 <ListGroup> 
                     {itemElement}
                 </ListGroup>
-               <hr className={classes.hr}/>
-               {buttonElement}
+                <hr className={classes.hr}/>
+                {buttonElement}
                 {inputElement}
+             </Fragment>  
+        )
+        return(
+            <div className={[classes.items,backgroundStyle].join(' ')}>
+                {content}
             </div>
         )
     }
@@ -132,7 +126,8 @@ const mapStateToProps = (state) =>{
         input:state.reducer.input,
         state:state.reducer,
         activeTab:state.reducer.activeTab,
-        userId:state.auth.userId
+        userId:state.auth.userId,
+        loading:state.reducer.loading
     }
 }
 

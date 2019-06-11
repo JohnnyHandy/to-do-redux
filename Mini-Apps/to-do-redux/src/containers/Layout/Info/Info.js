@@ -15,7 +15,7 @@ const Info = (props)=>{
     } else if (props.activeTab ==='3'){
         items = props.longTerm
     }
-    if(items.length !== 0){
+    if(items.length!==0){
         itemDetails=(
             items.map((i,index)=>{
                 if(i.id===props.itemIndex){
