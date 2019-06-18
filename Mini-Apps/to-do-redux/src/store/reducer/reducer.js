@@ -1,7 +1,7 @@
 
 import * as actionTypes from '../actions/actionTypes'
 import {updateObject} from './utility'
-const initialState ={
+export const initialState ={
     items:{
         shortTerm:[],
         mediumTerm:[],
@@ -222,8 +222,16 @@ const indexDown = (state,action)=>{
 }
 
 const indexUp = (state,action)=>{
+    let items
+    if(state.activeTab==='1'){
+        items=state.items.shortTerm
+    }else if(state.activeTab==='2'){
+        items=state.items.mediumTerm
+    }else if(state.activeTab==='3'){
+        items=state.items.longTerm
+    }
     let newIndexUp = state.itemIndex
-    if(newIndexUp < state.items.length-1){
+    if(newIndexUp < items.length-1){
         newIndexUp=newIndexUp+1
     }
     return updateObject(state,{itemIndex:newIndexUp})
@@ -246,7 +254,7 @@ const toggleInputHandler = (state,action)=>{
 }
 
 const setActiveTab =(state,action)=>{
-     return updateObject(state,{activeTab:action.payload})
+     return updateObject(state,{activeTab:action.payload,itemIndex:0})
 }
 
 const toggleModal = (state,action)=>{
@@ -277,7 +285,11 @@ const fetchItemsFail = (state,action)=>{
 }
 
 const resetItemList=(state,action)=>{
-    return updateObject(state,{items:initialState.items,error:null})
+    return updateObject(state,{items:{
+        shortTerm:[],
+        mediumTerm:[],
+        longTerm:[]
+    },error:null})
 }
 
 const reducer = (state=initialState,action)=>{

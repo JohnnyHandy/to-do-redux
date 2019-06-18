@@ -5,9 +5,9 @@ import {Card} from 'reactstrap'
 import classes from './Info.module.css'
 import {connect} from 'react-redux'
 
-const Info = (props)=>{
+export const Info = (props)=>{
     let itemDetails = 'Item Details'
-    let items = undefined
+    let items 
     if(props.activeTab === '1'){
         items = props.shortTerm
     } else if (props.activeTab ==='2'){

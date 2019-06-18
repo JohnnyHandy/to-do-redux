@@ -1,9 +1,7 @@
 import React, {Component,Fragment} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {connect} from 'react-redux'
-// import axios from '../../axios'
 import * as actionCreators from '../../store/actions/index'
-
 import classes from './List.module.css'
 import {Button,ListGroup} from 'reactstrap'
 import Input from '../UI/Input/Input'
@@ -11,7 +9,7 @@ import Items from './Items/Items'
 import {ShortItemsSpinner,MediumItemsSpinner,LongItemsSpinner} from '../UI/Spinner/Spinner'
 
 
-class List extends Component{
+export class List extends Component{
 
     render(){
         let inputElement = null
@@ -21,22 +19,22 @@ class List extends Component{
                 changedName={this.props.changedName}
                 changedDesc={this.props.changedDesc}
                 addOrEdit={this.props.addItem}
-                nameInput={this.props.state.nameInput}
-                descInput={this.props.state.descInput}
-                buttonText={this.props.state.buttonText}/>
+                nameInput={this.props.nameInput}
+                descInput={this.props.descInput}
+                buttonText={this.props.buttonText}/>
              )
          } 
 
          let editElement = null
-         if(this.props.state.edit){
+         if(this.props.edit){
             editElement=(
                 <Input 
                 changedName={this.props.changedName}
                 changedDesc={this.props.changedDesc}
                 addOrEdit={this.props.editItem}
-                nameInput={this.props.state.nameInput}
-                descInput={this.props.state.descInput}
-                buttonText={this.props.state.buttonText}/>
+                nameInput={this.props.nameInput}
+                descInput={this.props.descInput}
+                buttonText={this.props.buttonText}/>
              )
          }
          let itemElement = null
@@ -93,7 +91,7 @@ class List extends Component{
                         deleteClicked={()=>this.props.deleteItem(index)}
                         itemIndex={()=>this.props.itemIndexChanger(index)}
                         editInput={()=>this.props.editItemHandler(index)}
-                        editIndex={this.props.state.editIndex}
+                        editIndex={this.props.editIndex}
                         editElement={editElement}/>
              })
          }else{
@@ -124,7 +122,11 @@ const mapStateToProps = (state) =>{
         mediumTerm:state.reducer.items.mediumTerm,
         longTerm:state.reducer.items.longTerm,
         input:state.reducer.input,
-        state:state.reducer,
+        edit:state.reducer.edit,
+        editIndex:state.reducer.editIndex,
+        nameInput:state.reducer.nameInput,
+        descInput:state.reducer.descInput,
+        buttonText:state.reducer.buttonText,
         activeTab:state.reducer.activeTab,
         userId:state.auth.userId,
         loading:state.reducer.loading
