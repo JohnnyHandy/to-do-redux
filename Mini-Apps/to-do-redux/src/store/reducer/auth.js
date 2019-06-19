@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes'
 import {updateObject} from './utility'
 
-const initialState = {
+export const initialState = {
     token: null,
     userId: null,
     error: {error:null,method:''},
@@ -13,7 +13,7 @@ const authLogout = (state,action)=>{
 }
 
 const authStart = ( state, action ) => {
-    const updatedError = updateObject(state.error,{error:action.error,method:action.method})
+    const updatedError = updateObject(state.error,{method:action.method})
     return updateObject( state, { error: updatedError, loading: true } );
 };
 

@@ -20,12 +20,8 @@ export const initialState ={
 }
 
 
-const setState = (state,action)=>{
-    return updateObject(state,{items:action.payload})
-}
 const changedName = (state,action)=>{
-    const updateName = {itemName:action.payload}
-    const updatedName = updateObject(state.newItem,updateName)
+    const updatedName = updateObject(state.newItem,{itemName:action.payload})
     const updateState = {
         newItem:updatedName,
         nameInput:action.payload
@@ -34,13 +30,12 @@ const changedName = (state,action)=>{
 }
 
 const changedDesc = (state,action)=>{
-    const updateDesc = {itemDesc:action.payload};
-    const updatedDesc = updateObject(state.newItem,updateDesc)
-    const updateState2={
+    const updatedDesc = updateObject(state.newItem,{itemDesc:action.payload})
+    const updateState={
         newItem:updatedDesc,
         descInput:action.payload
     }
-    return updateObject(state,updateState2)
+    return updateObject(state,updateState)
 }
 
 const addItem = (state,action)=>{
@@ -294,7 +289,6 @@ const resetItemList=(state,action)=>{
 
 const reducer = (state=initialState,action)=>{
     switch(action.type){
-        case actionTypes.SET_STATE:return setState(state,action);
         case actionTypes.CHANGED_NAME:return changedName(state,action);
         case actionTypes.CHANGED_DESC:return changedDesc(state,action);
         case actionTypes.ADD_ITEM:return addItem(state,action);

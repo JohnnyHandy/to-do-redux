@@ -40,9 +40,10 @@ export const changePassword = (event)=>{
     }
 }
 
-export const authStart = ()=>{
+export const authStart = (method)=>{
     return{
-        type:actionTypes.AUTH_START
+        type:actionTypes.AUTH_START,
+        method:method
     }
 }
 
@@ -67,7 +68,7 @@ export const authFail = (error,method)=>{
 export const auth = (email,password,method)=>{
     console.log(method)
     return (dispatch)=>{
-        dispatch(authStart());
+        dispatch(authStart(method));
         const authData = {
             email:email,
             password:password,
