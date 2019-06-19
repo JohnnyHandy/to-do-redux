@@ -69,4 +69,64 @@ describe('Reducer',()=>{
             loading:false
         })
     })
+    it('Deleting should delete item from the items object respective array',()=>{
+        expect(reducer({
+            items:{
+                shortTerm:[{
+                    id:0,
+                    itemName:'test',
+                    itemDesc:'test',
+                    created:new Date().toISOString().slice(0,10),
+                    lastEdited:undefined
+                },{
+                    id:1,
+                    itemName:'test',
+                    itemDesc:'test',
+                    created:new Date().toISOString().slice(0,10),
+                    lastEdited:undefined 
+                }],
+                mediumTerm:[],
+                longTerm:[]
+            },
+            activeTab:'1'
+        },{
+            type:actionTypes.DELETE_ITEM,
+            index:1
+        })).toEqual({
+             items:{
+                shortTerm:[{
+                    id:0,
+                    itemName:'test',
+                    itemDesc:'test',
+                    created:new Date().toISOString().slice(0,10),
+                    lastEdited:undefined
+                }],
+                mediumTerm:[],
+                longTerm:[]
+            },
+            activeTab:'1',
+            itemIndex:0
+        })
+    }),
+    it('Editing should input newItem name and description into items editing element',()=>{
+        expect(reducer({
+            items:{
+                shortTerm:[{
+                    id:0,
+                    itemName:'test',
+                    itemDesc:'test',
+                    created:new Date().toISOString().slice(0,10),
+                    lastEdited:undefined
+                }],
+                mediumTerm:[],
+                longTerm:[]
+            },
+            newItem:{
+                itemName:'test',
+                itemDesc:'test'
+            },
+            activeTab:'1',
+            editIndex:1
+        }))
+    })
 })
