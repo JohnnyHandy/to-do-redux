@@ -30,4 +30,43 @@ describe('Reducer',()=>{
             descInput:'test'
         })
     })
+    it('Adding item should add newItem content into the items object arrays(short term as an example)',()=>{
+        expect(reducer({
+            items:{
+              shortTerm:[],
+              mediumTerm:[],
+              longTerm:[]
+            },
+            newItem:{
+                itemName:'test',
+                itemDesc:'test'
+            },
+            activeTab:'1'
+        },{
+            type:actionTypes.ADD_ITEM,
+            
+        })).toEqual({
+            items:{
+                shortTerm:[{
+                    id:0,
+                    itemName:'test',
+                    itemDesc:'test',
+                    created:new Date().toISOString().slice(0,10),
+                    lastEdited:undefined
+                }],
+                mediumTerm:[],
+                longTerm:[]
+            },
+            newItem:{},
+            input:false,
+            edit:false,
+            itemIndex:0,
+            nameInput:'',
+            descInput:'',
+            activeTab:'1',
+            buttonText:'',
+            error:null,
+            loading:false
+        })
+    })
 })
