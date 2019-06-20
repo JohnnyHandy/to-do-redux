@@ -1,0 +1,9 @@
+.info{
+    width:100%;
+    height:100%;
+    box-sizing: border-box;
+    border:1px solid lightcoral;
+    margin:auto;
+    background-color:#d7d8a6 !important;
+    font-family: 'Oswald', sans-serif;
+}

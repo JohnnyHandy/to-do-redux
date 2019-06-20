@@ -1,0 +1,17 @@
+.navLink{
+    cursor:pointer;
+    outline:0
+}
+
+
+  .btn:focus {outline: none;box-shadow: none;border:2px solid transparent;}
+
+  .btn-primary.focus, .btn-primary:focus {
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    }
+
+    .btn-secondary.focus, .btn-secondary:focus {
+        -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    }
