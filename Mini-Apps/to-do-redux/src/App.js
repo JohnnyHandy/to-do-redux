@@ -4,6 +4,7 @@ import { faPlus,faTimesCircle,faPen, faArrowCircleRight, faArrowCircleLeft,faTim
 import Layout from './containers/Layout/Layout'
 import {connect} from 'react-redux'
 import * as actions from './store/actions/index'
+import classes from './App.module.css'
 
 library.add(faPlus,faTimesCircle,faPen,faArrowCircleRight,faArrowCircleLeft,faTimes,faLock,faAt);
 
@@ -40,7 +41,7 @@ class App extends Component {
 
     
     return (
-      <div>
+      <div className={classes.div}>
         <Layout background={this.state.background} ></Layout>
       </div>
     );

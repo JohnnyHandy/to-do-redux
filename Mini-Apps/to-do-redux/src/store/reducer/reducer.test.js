@@ -107,26 +107,52 @@ describe('Reducer',()=>{
             activeTab:'1',
             itemIndex:0
         })
-    }),
-    it('Editing should input newItem name and description into items editing element',()=>{
+    })
+    it('Editing should input newItem name and description into items editing element, besides altering the "lastEdited" property',()=>{
         expect(reducer({
             items:{
                 shortTerm:[{
                     id:0,
                     itemName:'test',
                     itemDesc:'test',
-                    created:new Date().toISOString().slice(0,10),
+                    created:'date',
                     lastEdited:undefined
                 }],
                 mediumTerm:[],
                 longTerm:[]
             },
             newItem:{
-                itemName:'test',
-                itemDesc:'test'
+                itemName:'test2',
+                itemDesc:'test2'
             },
             activeTab:'1',
-            editIndex:1
-        }))
+            editIndex:0,
+            edit:true,
+            nameInput:'test2',
+            descInput:'test2'
+        },{
+            type:actionTypes.EDIT_ITEM,
+        })).toEqual({
+            items:{
+                shortTerm:[{
+                    id:0,
+                    itemName:'test2',
+                    itemDesc:'test2',
+                    created:'date',
+                    lastEdited:new Date().toISOString().slice(0,10)
+                }],
+                mediumTerm:[],
+                longTerm:[]
+
+            },
+            activeTab:'1',
+            edit:false,
+            nameInput:'',
+            descInput:'',
+            editIndex:undefined,
+            newItem:{},
+            input:false,
+            itemIndex:0 
+        })
     })
 })

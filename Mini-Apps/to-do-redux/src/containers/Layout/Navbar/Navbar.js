@@ -5,7 +5,7 @@ import classes from './Navbar.module.css'
 
 import * as actionTypes from '../../../store/actions/index'
 
-class navbar extends Component{
+export class NavBar extends Component{
     constructor(props) {
         super(props);
       this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -49,4 +49,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(navbar)
+export default connect(mapStateToProps,mapDispatchToProps)(NavBar)

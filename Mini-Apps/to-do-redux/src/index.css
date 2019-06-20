@@ -6,6 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:url('https://images.pexels.com/photos/761142/pexels-photo-761142.jpeg?cs=srgb&dl=blocks-bricks-brickwall-761142.jpg&fm=jpg');
+  background-size: cover
 }
 
 code {
