@@ -12,11 +12,13 @@ export const initialState ={
     itemIndex:0,
     edit:undefined,
     editIndex:undefined,
+    deleteIndex:undefined,
     nameInput:'',
     descInput:'',
     buttonText:'',
     activeTab:'1',
-    modal:false
+    modal:false,
+    confirmation:false
 }
 
 
@@ -114,9 +116,13 @@ const deleteItem = (state,action)=>{
     } else if(state.activeTab==='3'){
         updatedContent = updateObject(state.items,{longTerm:deleteItems})
     }
-    return updateObject(state,{items:updatedContent,itemIndex:newIndex})
+    return updateObject(state,{items:updatedContent,itemIndex:newIndex,deleteIndex:undefined,confirmation:undefined})
 
 
+}
+
+const confirmation = (state,action)=>{
+    return updateObject(state,{confirmation:true, modal:true,deleteIndex:action.index})
 }
 
 const editItemHandler = (state,action)=>{
@@ -254,7 +260,7 @@ const setActiveTab =(state,action)=>{
 
 const toggleModal = (state,action)=>{
     const updateModal = !state.modal
-    return updateObject(state,{modal:updateModal})
+    return updateObject(state,{modal:updateModal,confirmation:false})
 }
 
 const fetchItemsSuccess = (state,action)=>{
@@ -305,6 +311,7 @@ const reducer = (state=initialState,action)=>{
         case actionTypes.RESET_ITEM_LIST:return resetItemList(state,action);
         case actionTypes.FETCH_ITEMS_FAIL:return fetchItemsFail(state,action);
         case actionTypes.FETCH_ITEMS_SUCCESS:return fetchItemsSuccess(state,action);
+        case actionTypes.CONFIRMATION:return confirmation(state,action);
         default: return state
     }
 }

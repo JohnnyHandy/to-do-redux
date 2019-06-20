@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes'
 import axios from '../../axios'
 
+
+
 export const addItem = ()=>{
     return async (dispatch,getState)=>{
         await dispatch(addItemHandler());
@@ -17,9 +19,16 @@ const addItemHandler = ()=>{
     }
 }
 
-export const deleteItem = (index)=>{
+export const confirmation = (index)=>{
+    return{
+        type:actionTypes.CONFIRMATION,
+        index:index
+    }
+}
+
+export const deleteItem = ()=>{
     return async(dispatch,getState)=>{
-        await dispatch(deleteItemHandler(index));
+        await dispatch(deleteItemHandler(getState().reducer.deleteIndex));
         if(getState().auth.userId){
             await axios.put('users/'+getState().auth.userId+'/list/items.json?auth='+getState().auth.token,getState().reducer.items)
             .then().catch()

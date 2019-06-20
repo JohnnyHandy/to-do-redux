@@ -20,9 +20,10 @@ export const checkAuthTimeout = (expirationTime)=>{
     }
 }
 
-export const toggleModal = ()=>{
+export const toggleModal = (response)=>{
     return{
         type:actionTypes.TOGGLE_MODAL,
+        response:response
     }
 }
 

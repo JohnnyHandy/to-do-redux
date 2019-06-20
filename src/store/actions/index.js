@@ -13,7 +13,8 @@ export {
     initialState,
     setActiveTab,
     fetchItems,
-    resetItemList
+    resetItemList,
+    confirmation
 } from './listControl';
 
 export{
